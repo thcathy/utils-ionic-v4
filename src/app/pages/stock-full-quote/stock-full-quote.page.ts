@@ -145,8 +145,8 @@ export class StockFullQuotePage implements OnInit {
 @Component({
     template: `
     <ion-list style="padding: 0px; margin:0px;">
-      <ion-item><ion-button expand="full" (click)="save()">Save</ion-button></ion-item>
-      <ion-item><ion-button expand="full" (click)="load()">Load</ion-button></ion-item>
+      <ion-item (click)="save()">Save</ion-item>
+      <ion-item (click)="load()">Load</ion-item>
     </ion-list>`
 })
 export class CodePopoverPage {
