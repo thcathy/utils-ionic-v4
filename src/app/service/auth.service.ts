@@ -1,9 +1,8 @@
 import {Injectable, NgZone} from '@angular/core';
-import {App, NavController} from "ionic-angular";
-import {HelloIonicPage} from "../../pages/hello-ionic/hello-ionic";
 import Auth0Cordova from '@auth0/cordova';
 import Auth0 from 'auth0-js';
-import {AppService} from "./app.service";
+import {AppService} from './app.service';
+import {App, NavController} from '@ionic/angular';
 
 const auth0CordovaConfig = {
   // needed for auth0
@@ -17,7 +16,7 @@ const auth0CordovaConfig = {
   scope: 'openid profile'
 };
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   userProfile: any;
   idTokenKey = 'id_token';
@@ -38,9 +37,8 @@ export class AuthService {
   auth0Cordova = new Auth0.WebAuth(auth0CordovaConfig);
 
 
-  constructor(protected app: App,
-              public zone: NgZone,
-              protected appService: AppService) {
+  constructor(private zone: NgZone,
+              private appService: AppService) {
     try {
       this.userProfile = localStorage.getItem('profile');
       this.idToken = localStorage.getItem(this.idTokenKey);
@@ -50,7 +48,8 @@ export class AuthService {
   }
 
   getNavCtrl(): NavController {
-    return this.app.getRootNav();
+    // return this.app.getRootNav();
+      return null;
   }
 
   public login(): void {
@@ -71,12 +70,12 @@ export class AuthService {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
-        this.getNavCtrl().setRoot(HelloIonicPage);
-        this.getProfile((err, profile) => {
-          console.warn(`cannot get profile: ${err}`);
+        // this.getNavCtrl().setRoot(HelloIonicPage);
+        this.getProfile((e, profile) => {
+          console.warn(`cannot get profile: ${e}`);
         });
       } else if (err) {
-        this.getNavCtrl().setRoot(HelloIonicPage);
+        // this.getNavCtrl().setRoot(HelloIonicPage);
         console.log(err);
       }
     });
@@ -87,13 +86,13 @@ export class AuthService {
     const options = { scope: 'openid profile offline_access' };
 
     client.authorize(options, (err, authResult) => {
-      if(err) {
+      if (err) {
         throw err;
       }
       this.setSession(authResult);
       this.auth0Cordova.client.userInfo(this.accessToken, (err, profile) => {
-        if(err) {
-          this.getNavCtrl().setRoot(HelloIonicPage);
+        if (err) {
+          // this.getNavCtrl().setRoot(HelloIonicPage);
           throw err;
         }
 
@@ -102,7 +101,7 @@ export class AuthService {
         this.zone.run(() => {
           this.userProfile = profile;
         });
-        this.getNavCtrl().setRoot(HelloIonicPage);
+        // this.getNavCtrl().setRoot(HelloIonicPage);
       });
     });
   }
@@ -124,7 +123,7 @@ export class AuthService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     // Go back to the home route
-    this.getNavCtrl().setRoot(HelloIonicPage);
+    // this.getNavCtrl().setRoot(HelloIonicPage);
     this.userProfile = null;
   }
 

@@ -1,28 +1,26 @@
-import { Injectable }              from '@angular/core';
-import { Http, Response }          from '@angular/http';
+import {StockHolding} from '../entity/stock-holding';
+import {StockQuote} from '../entity/stock-quote';
+import {MarketDailyReport} from '../entity/market-daily-report';
+import {Injectable} from '@angular/core';
+import {environment} from '../../environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {NGXLogger} from 'ngx-logger';
 
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
-
-import {StockHolding} from "../entity/stock-holding";
-import {StockQuote} from "../entity/stock-quote";
-import {MarketDailyReport} from "../entity/market-daily-report";
-import {ENV} from "@app/env";
-import {HttpClient} from "@angular/common/http";
-
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class StockService {
-  private LIST_HOLDING_URL = ENV.apiHost + '/rest/stock/holding/list';  // URL to web API
-  private DELETE_HOLDING_URL = ENV.apiHost + '/rest/stock/holding/delete/';
-  private STOCK_PERFORMANCE_URL = ENV.apiHost + '/rest/stock/liststocksperf';
-  private MARKET_DAILY_REPORT_URL = ENV.apiHost + '/rest/stock/marketreports';
-  private INDEX_QUOTE_URL = ENV.apiHost + '/rest/stock/indexquotes';
-  private FULL_QUOTE_URL = ENV.apiHost + '/rest/stock/fullquote';
-  private SAVE_QUERY_URL = ENV.apiHost + '/rest/stock/save/query';
-  private LOAD_QUERY_URL = ENV.apiHost + '/rest/stock/load/query';
+  private LIST_HOLDING_URL = environment.apiHost + '/rest/stock/holding/list';  // URL to web API
+  private DELETE_HOLDING_URL = environment.apiHost + '/rest/stock/holding/delete/';
+  private STOCK_PERFORMANCE_URL = environment.apiHost + '/rest/stock/liststocksperf';
+  private MARKET_DAILY_REPORT_URL = environment.apiHost + '/rest/stock/marketreports';
+  private INDEX_QUOTE_URL = environment.apiHost + '/rest/stock/indexquotes';
+  private FULL_QUOTE_URL = environment.apiHost + '/rest/stock/fullquote';
+  private SAVE_QUERY_URL = environment.apiHost + '/rest/stock/save/query';
+  private LOAD_QUERY_URL = environment.apiHost + '/rest/stock/load/query';
 
-  constructor (private http: HttpClient) {}
+  constructor (
+      private http: HttpClient,
+      public logger: NGXLogger
+  ) {}
 
   getStockHoldings(): Promise<StockHolding[]> {
     return this.http.get(this.LIST_HOLDING_URL)
@@ -53,7 +51,7 @@ export class StockService {
   }
 
   getFullQuote(codes: string): Promise<Map<string, object>> {
-    if (codes == null) codes = '';
+    if (codes == null) { codes = ''; }
 
     return this.http.get(this.FULL_QUOTE_URL + '?codes=' + codes)
       .toPromise()
@@ -69,7 +67,7 @@ export class StockService {
   }
 
   saveQuery(codes: string): Promise<string> {
-    if (codes == null) codes = '';
+    if (codes == null) { codes = ''; }
 
     return this.http.get(this.SAVE_QUERY_URL + '?codes=' + codes, {responseType: 'text'})
       .toPromise()
@@ -85,7 +83,7 @@ export class StockService {
   }
 
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
+    this.logger.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
 }

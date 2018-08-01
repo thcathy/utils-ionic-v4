@@ -1,17 +1,13 @@
-import { Injectable }              from '@angular/core';
+import {Fund} from '../entity/fund';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/internal/Observable';
+import {environment} from '../../environments/environment';
 
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
-
-import {Fund} from "../entity/fund";
-import {ENV} from "@app/env";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs/Observable";
-
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class FundService {
-  private ALL_FUND_URL = ENV.apiHost + '/rest/fund/getall';
+  private ALL_FUND_URL = environment.apiHost + '/rest/fund/getall';
+  private BASE_REQUEST_URL = environment.apiHost + '/rest/fund/';
 
   constructor (private http: HttpClient) {}
 
@@ -20,9 +16,9 @@ export class FundService {
   }
 
   submitRequest(request: string): Promise<string> {
-    if (request.slice(-1) != '/') request += '/';
+    if (request.slice(-1) !== '/') { request += '/'; }
     console.log(`calling fund request url ${request}`);
-    return this.http.get(ENV.apiHost + '/rest/fund/' + request)
+    return this.http.get(this.BASE_REQUEST_URL + request)
             .toPromise()
             .then(response => {
               try {

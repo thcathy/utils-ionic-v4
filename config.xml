@@ -81,4 +81,11 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^2.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
+    <plugin name="cordova-plugin-safariviewcontroller" spec="^1.5.4" />
+    <plugin name="cordova-plugin-customurlscheme" spec="^4.3.0">
+        <variable name="URL_SCHEME" value="com.thc.utils" />
+        <variable name="ANDROID_SCHEME" value="com.thc.utils" />
+        <variable name="ANDROID_HOST" value="thcathy.auth0.com" />
+        <variable name="ANDROID_PATHPREFIX" value="/cordova/com.thc.utils/callback" />
+    </plugin>
 </widget>

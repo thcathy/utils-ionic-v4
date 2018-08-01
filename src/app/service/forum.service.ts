@@ -1,36 +1,27 @@
-import { Injectable }              from '@angular/core';
-
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/toPromise';
-
 import { ForumThread } from '../entity/forum-thread';
-import {ForumWishItem} from "../entity/forum-wishlist";
+import {ForumWishItem} from '../entity/forum-wishlist';
 
-import { ENV } from '@app/env';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs/Observable";
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {environment} from '../../environments/environment';
+import {Observable} from 'rxjs/internal/Observable';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ForumService {
-  private LIST_URL = ENV.apiHost + '/rest/forum/list/';  // URL to web API
-  private VISITED_URL = ENV.apiHost + '/rest/forum/visited';
-  private WISHLIST_URL = ENV.apiHost + '/rest/forum/wishlist/list';
-  private ADD_WISHLIST_URL = ENV.apiHost + '/rest/forum/wishlist/add/';
-  private DELETE_WISHLIST_URL = ENV.apiHost + '/rest/forum/wishlist/delete/';
-
-
+  private LIST_URL = environment.apiHost + '/rest/forum/list/';  // URL to web API
+  private VISITED_URL = environment.apiHost + '/rest/forum/visited';
+  private WISHLIST_URL = environment.apiHost + '/rest/forum/wishlist/list';
+  private ADD_WISHLIST_URL = environment.apiHost + '/rest/forum/wishlist/add/';
+  private DELETE_WISHLIST_URL = environment.apiHost + '/rest/forum/wishlist/delete/';
 
   constructor (private http: HttpClient) {}
 
-
-
   getForumThreads(type: String, page: number): Observable<ForumThread[]> {
-    return this.http.get<ForumThread[]>(this.LIST_URL + type + "/" + page);
+    return this.http.get<ForumThread[]>(this.LIST_URL + type + '/' + page);
   }
 
   visitedUrl(url: string, title: string): Promise<string> {
-    return this.http.post(this.VISITED_URL, {'url': url, 'title': title},{responseType: 'text'})
+    return this.http.post(this.VISITED_URL, {'url': url, 'title': title}, {responseType: 'text'})
       .toPromise()
       .then(response => 'success')
       .catch(this.handleError);

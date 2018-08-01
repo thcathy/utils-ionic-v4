@@ -1,3 +1,44 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-split-pane>
+    <ion-menu>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>THC Utils</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item *ngIf="!isAuthenticated()" (click)="login()"><ion-icon name="log-in"></ion-icon> Login</ion-item>
+            <ion-item *ngIf="isAuthenticated()" (click)="logout()"><ion-icon name="log-out"></ion-icon> Logout</ion-item>
+
+            <ion-item-divider>forum</ion-item-divider>
+            <ion-item [routerDirection]="'root'" [routerLink]="['/forum-tab', {outlets: {'wishlist': ['wishlist']}}]">Wish List</ion-item>
+            <ion-item [routerDirection]="'root'" [routerLink]="'/forum/abc'">Music</ion-item>
+            <ion-item [routerDirection]="'root'" [routerLink]="'/forum/abc'">Movie</ion-item>
+
+            <ion-item-divider>Quote</ion-item-divider>
+            <ion-item [routerDirection]="'root'" [routerLink]="'stock-full-quote'">Full Quote</ion-item>
+          </ion-menu-toggle>
+
+
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <ion-item-divider>home</ion-item-divider>
+            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+
+
+        </ion-list>
+      </ion-content>
+
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+
+  </ion-split-pane>
 </ion-app>
