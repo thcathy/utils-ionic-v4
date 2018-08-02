@@ -8,30 +8,22 @@
       <ion-content>
         <ion-list>
           <ion-menu-toggle auto-hide="false">
-            <ion-item *ngIf="!isAuthenticated()" (click)="login()"><ion-icon name="log-in"></ion-icon> Login</ion-item>
-            <ion-item *ngIf="isAuthenticated()" (click)="logout()"><ion-icon name="log-out"></ion-icon> Logout</ion-item>
+            <ion-item [routerDirection]="'root'" [routerLink]="'home'"><ion-label>Home</ion-label></ion-item>
+            <ion-item *ngIf="!isAuthenticated()" (click)="login()"><ion-label><ion-icon name="log-in"></ion-icon> Login</ion-label></ion-item>
+            <ion-item *ngIf="isAuthenticated()" (click)="logout()"><ion-label><ion-icon name="log-out"></ion-icon> Logout</ion-label></ion-item>
 
-            <ion-item-divider>forum</ion-item-divider>
-            <ion-item [routerDirection]="'root'" [routerLink]="['/forum-tab', {outlets: {'wishlist': ['wishlist']}}]">Wish List</ion-item>
-            <ion-item [routerDirection]="'root'" [routerLink]="'/forum/abc'">Music</ion-item>
-            <ion-item [routerDirection]="'root'" [routerLink]="'/forum/abc'">Movie</ion-item>
+            <ion-item-divider><ion-label>forum</ion-label></ion-item-divider>
+            <ion-item [routerDirection]="'root'" [routerLink]="['/forum-tab', {outlets: {'wishlist': ['wishlist']}}]"><ion-label>Wish List</ion-label></ion-item>
+            <ion-item [routerDirection]="'root'" [routerLink]="'/forum/abc'"><ion-label>Music</ion-label></ion-item>
+            <ion-item [routerDirection]="'root'" [routerLink]="'/forum/abc'"><ion-label>Movie</ion-label></ion-item>
 
-            <ion-item-divider>Quote</ion-item-divider>
-            <ion-item [routerDirection]="'root'" [routerLink]="'stock-full-quote'">Full Quote</ion-item>
+            <ion-item-divider><ion-label>Quote</ion-label></ion-item-divider>
+            <ion-item [routerDirection]="'root'" [routerLink]="'stock-full-quote'"><ion-label>Full Quote</ion-label></ion-item>
+
+            <ion-item-divider><ion-label>Stock Manage</ion-label></ion-item-divider>
+            <ion-item [routerDirection]="'root'" [routerLink]="'stock-create-holding'"><ion-label>Create Holding</ion-label></ion-item>
+            <ion-item [routerDirection]="'root'" [routerLink]="'stock-manage-fund'"><ion-label>Manage Fund</ion-label></ion-item>
           </ion-menu-toggle>
-
-
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <ion-item-divider>home</ion-item-divider>
-            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
-              <ion-icon slot="start" [name]="p.icon"></ion-icon>
-              <ion-label>
-                {{p.title}}
-              </ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-
-
 
         </ion-list>
       </ion-content>

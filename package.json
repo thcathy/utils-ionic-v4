@@ -30,9 +30,11 @@
     "@ionic/ng-toolkit": "1.0.0",
     "@ionic/schematics-angular": "1.0.1",
     "auth0-js": "^9.7.3",
+    "cordova": "^8.0.0",
     "cordova-plugin-customurlscheme": "^4.3.0",
     "cordova-plugin-safariviewcontroller": "^1.5.4",
     "core-js": "^2.5.3",
+    "ionic": "^4.0.3",
     "ngx-logger": "^3.0.5",
     "rxjs": "6.2.2",
     "zone.js": "^0.8.26"

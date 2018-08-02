@@ -12,13 +12,6 @@ import Auth0Cordova from '@auth0/cordova';
     templateUrl: 'app.component.html'
 })
 export class AppComponent {
-    public appPages = [
-        {
-            title: 'Home',
-            url: '/home',
-            icon: 'home'
-        }
-    ];
 
     constructor(
         private platform: Platform,

@@ -4,7 +4,9 @@ import {Routes, RouterModule} from '@angular/router';
 const routes: Routes = [
     {path: '', redirectTo: 'home', pathMatch: 'full'},
     {path: 'home', loadChildren: './pages/home/home.module#HomePageModule'},
-    { path: 'stock-full-quote', loadChildren: './pages/stock-full-quote/stock-full-quote.module#StockFullQuotePageModule' }
+    { path: 'stock-full-quote', loadChildren: './pages/stock-full-quote/stock-full-quote.module#StockFullQuotePageModule' },  { path: 'stock-create-holding', loadChildren: './pages/stock-create-holding/stock-create-holding.module#StockCreateHoldingPageModule' },
+  { path: 'stock-manage-fund', loadChildren: './pages/stock-manage-fund/stock-manage-fund.module#StockManageFundPageModule' }
+
 ];
 
 @NgModule({

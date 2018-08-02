@@ -5,8 +5,6 @@ import {LoadingController, NavParams, PopoverController, ToastController} from '
 import {StockQuote} from '../../entity/stock-quote';
 import {StockHolding} from '../../entity/stock-holding';
 import {Fund} from '../../entity/fund';
-import {ViewController} from '@ionic/angular/dist/types/components/nav/view-controller';
-import {Popover} from '@ionic/angular/dist/types/components/popover/popover';
 
 @Component({
     selector: 'app-stock-full-quote',
@@ -143,15 +141,19 @@ export class StockFullQuotePage implements OnInit {
 }
 
 @Component({
-    template: `
-    <ion-list style="padding: 0px; margin:0px;">
-      <ion-item (click)="save()">Save</ion-item>
-      <ion-item (click)="load()">Load</ion-item>
-    </ion-list>`
+  template: `
+      <ion-list style="padding: 0px; margin:0px;">
+          <ion-item (click)="save()">
+              <ion-label>Save</ion-label>
+          </ion-item>
+          <ion-item (click)="load()">
+              <ion-label>Load</ion-label>
+          </ion-item>
+      </ion-list>`
 })
 export class CodePopoverPage {
     parent: StockFullQuotePage;
-    popover: Popover;
+    popover: any;
 
     constructor(
         private navParams: NavParams) {

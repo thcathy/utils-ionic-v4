@@ -10,20 +10,20 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col col-md-1 col-lg-2 col-xl-3 style="height: 1px;"></ion-col>
-      <ion-col col-12 col-md-10 col-lg-8 col-xl-6>
+      <ion-col size-md="1" size-lg="2" size-xl="3" style="height: 1px;"></ion-col>
+      <ion-col size="12" size-md="10" size-lg="8" size-xl="6">
         <ion-list>
           <ion-item>
-            <ion-input type="text" [(ngModel)]="itemText" placeholder="new item"></ion-input>
-            <button ion-button clear item-end (click)="onAdd()" icon-only><ion-icon name="add" style="font-size: xx-large;"></ion-icon></button>
+            <ion-label><ion-input type="text" [(ngModel)]="itemText" placeholder="new item"></ion-input></ion-label>
+            <ion-button fill="clear" slot="end" (click)="onAdd()"><ion-icon name="add" style="font-size: xx-large;"></ion-icon></ion-button>
           </ion-item>
           <ion-item *ngFor="let item of wishlists" >
-            {{item.text}}
-            <button ion-button icon-only clear item-end (click)="confirmDelete(item)"><ion-icon name="trash" style="font-size: xx-large;"></ion-icon></button>
+            <ion-label>{{item.text}}</ion-label>
+            <ion-button fill="clear" slot="end" (click)="confirmDelete(item)"><ion-icon name="trash" style="font-size: xx-large;"></ion-icon></ion-button>
           </ion-item>
         </ion-list>
       </ion-col>
-      <ion-col col-md-1 col-lg-2 col-xl-3 style="height: 1px;"></ion-col>
+      <ion-col size-md="1" size-lg="2" size-xl="3" style="height: 1px;"></ion-col>
     </ion-row>
   </ion-grid>
 
