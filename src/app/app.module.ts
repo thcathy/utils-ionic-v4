@@ -16,11 +16,10 @@ import {FundService} from './service/fund.service';
 import {AuthService} from './service/auth.service';
 import {AuthCordovaService} from './service/auth-cordova.service';
 import {AppService} from './service/app.service';
-import {SelectFundComponent} from './components/select-fund/select-fund.component';
 import {ForumTabPageModule} from './pages/forum-tab/forum-tab.module';
 
 @NgModule({
-  declarations: [AppComponent, SelectFundComponent],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [
       BrowserModule, IonicModule.forRoot(),

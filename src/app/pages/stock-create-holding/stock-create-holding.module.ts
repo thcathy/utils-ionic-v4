@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { StockCreateHoldingPage } from './stock-create-holding.page';
-import {ComponentsModule} from '../../components/components';
+import {SelectFundComponentModule} from '../../components/select-fund/select-fund.module';
 
 const routes: Routes = [
   {
@@ -20,7 +20,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    ComponentsModule,
+    SelectFundComponentModule,
     RouterModule.forChild(routes)
   ],
   declarations: [StockCreateHoldingPage]
