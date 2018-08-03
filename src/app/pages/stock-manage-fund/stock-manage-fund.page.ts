@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {Fund} from '../../entity/fund';
 import {FundService} from '../../service/fund.service';
 import {AppService} from '../../service/app.service';
@@ -48,7 +48,8 @@ export class StockManageFundPage implements OnInit {
 
   onSelectString(text: string) {
     this.requestUrl += text;
-    this.requestInput.setFocus();
+    this.requestInput.nativeElement.shadowRoot.querySelector('input').focus();
+
   }
 
 }

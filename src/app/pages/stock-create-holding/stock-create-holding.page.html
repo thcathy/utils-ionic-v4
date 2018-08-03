@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -14,12 +14,10 @@
       <ion-col size="12" size-md="10" size-lg="8" size-xl="6">
         <ion-list no-margin>
           <ion-item>
-            <ion-label>
-              <ion-textarea placeholder="execution message" [(ngModel)]="message"></ion-textarea>
-            </ion-label>
+            <ion-textarea placeholder="execution message" [(ngModel)]="message"></ion-textarea>
           </ion-item>
           <ion-item>
-            <ion-label><ion-input placeholder="hscei" [(ngModel)]="hscei"></ion-input></ion-label>
+            <ion-input placeholder="hscei" [(ngModel)]="hscei"></ion-input>
           </ion-item>
         </ion-list>
         <ion-grid>

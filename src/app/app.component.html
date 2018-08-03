@@ -1,7 +1,7 @@
 <ion-app>
     <ion-menu>
       <ion-header>
-        <ion-toolbar>
+        <ion-toolbar color="primary">
           <ion-title>THC Utils</ion-title>
         </ion-toolbar>
       </ion-header>
@@ -22,6 +22,7 @@
 
             <ion-item-divider><ion-label>Stock Manage</ion-label></ion-item-divider>
             <ion-item [routerDirection]="'root'" [routerLink]="'stock-create-holding'"><ion-label>Create Holding</ion-label></ion-item>
+            <ion-item [routerDirection]="'root'" [routerLink]="'stock-manage-holding'"><ion-label>Manage Holding</ion-label></ion-item>
             <ion-item [routerDirection]="'root'" [routerLink]="'stock-manage-fund'"><ion-label>Manage Fund</ion-label></ion-item>
           </ion-menu-toggle>
 

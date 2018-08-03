@@ -3,6 +3,7 @@ import Auth0Cordova from '@auth0/cordova';
 import Auth0 from 'auth0-js';
 import {AppService} from './app.service';
 import {App, NavController} from '@ionic/angular';
+import {Router} from '@angular/router';
 
 const auth0CordovaConfig = {
   // needed for auth0
@@ -38,18 +39,14 @@ export class AuthService {
 
 
   constructor(private zone: NgZone,
-              private appService: AppService) {
+              private appService: AppService,
+              private router: Router) {
     try {
       this.userProfile = localStorage.getItem('profile');
       this.idToken = localStorage.getItem(this.idTokenKey);
     } catch (e) {
       localStorage.setItem(this.idTokenKey, null);
     }
-  }
-
-  getNavCtrl(): NavController {
-    // return this.app.getRootNav();
-      return null;
   }
 
   public login(): void {
@@ -70,12 +67,12 @@ export class AuthService {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
-        // this.getNavCtrl().setRoot(HelloIonicPage);
+        this.router.navigate(['/home']);
         this.getProfile((e, profile) => {
           console.warn(`cannot get profile: ${e}`);
         });
       } else if (err) {
-        // this.getNavCtrl().setRoot(HelloIonicPage);
+        this.router.navigate(['/home']);
         console.log(err);
       }
     });
@@ -92,7 +89,7 @@ export class AuthService {
       this.setSession(authResult);
       this.auth0Cordova.client.userInfo(this.accessToken, (err, profile) => {
         if (err) {
-          // this.getNavCtrl().setRoot(HelloIonicPage);
+          this.router.navigate(['/home']);
           throw err;
         }
 
@@ -101,7 +98,7 @@ export class AuthService {
         this.zone.run(() => {
           this.userProfile = profile;
         });
-        // this.getNavCtrl().setRoot(HelloIonicPage);
+        this.router.navigate(['/home']);
       });
     });
   }
@@ -123,7 +120,7 @@ export class AuthService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     // Go back to the home route
-    // this.getNavCtrl().setRoot(HelloIonicPage);
+    this.router.navigate(['/home']);
     this.userProfile = null;
   }
 

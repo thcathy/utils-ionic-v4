@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -7,6 +7,83 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="1" size-lg="2" size-xl="3" style="height: 1px;"></ion-col>
+      <ion-col size="12" size-md="10" size-lg="8" size-xl="6" style="font-size: small;">
+
+        <p>Existing Fund Names: </p>
+        <ion-grid>
+          <ion-row>
+            <ion-col *ngFor="let fund of funds">
+              <ion-button fill="outline" size="small" (mouseup)="onSelectString(fund.name + '/')">{{fund.name}}</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <p>URL:</p>
+        <ion-list no-lines>
+          <ion-item>
+            <ion-button fill="outline" size="small" (click)="onSelectString('create/')">create</ion-button><span>/[fundName]</span>
+          </ion-item>
+          <ion-item>
+            <ion-button fill="outline" size="small" (click)="onSelectString('delete/')">delete</ion-button><span>/[fundName]</span>
+          </ion-item>
+          <ion-item>
+            <span>[fundName]/[</span>
+            <ion-button fill="outline" size="small" (click)="onSelectString('buy/')">buy</ion-button>
+            <span>,</span>
+            <ion-button fill="outline" size="small" (click)="onSelectString('sell/')">sell</ion-button>
+            <span>]/[code]/[qty]/[price]</span>
+          </ion-item>
+          <ion-item>
+            <span>[fundName]/</span>
+            <ion-button fill="outline" size="small" (click)="onSelectString('remove/')">remove</ion-button>
+            <span>/[code]</span>
+          </ion-item>
+          <ion-item>
+            <span>[fundName]/</span>
+            <ion-button fill="outline" size="small" (click)="onSelectString('payinterest/')">payinterest</ion-button>
+            <span>/[code]/[amount]</span>
+          </ion-item>
+          <ion-item>
+            <span>[fundName]/</span>
+            <ion-button fill="outline" size="small" (click)="onSelectString('set/profit/')">set/profit</ion-button>
+            <span>/[amount]</span>
+          </ion-item>
+          <ion-item>
+            <span>[fundName]/[</span>
+              <ion-button fill="outline" size="small" (click)="onSelectString('add/')">add</ion-button>
+              ,
+              <ion-button fill="outline" size="small" (click)="onSelectString('subtract/')">subtract</ion-button>
+              ]/
+              <ion-button fill="outline" size="small" (click)="onSelectString('profit/')">profit</ion-button>
+              /[amounts(comma separated)]
+          </ion-item>
+          <ion-item>
+            <ion-icon name="link" slot="start"></ion-icon><ion-label position="floating">url</ion-label><ion-input color="primary" #requestInput [(ngModel)]="requestUrl"></ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-grid>
+          <ion-row>
+            <ion-col><ion-button fill="clear" (click)="onSubmit()"><ion-icon name="send"></ion-icon>&nbsp; Submit</ion-button></ion-col>
+            <ion-col><ion-button fill="clear" (click)="onClear()"><ion-icon name="close"></ion-icon>&nbsp; Clear</ion-button></ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <p>{{result}}</p>
+
+        <ion-list *ngIf="requestHistory.length > 0">
+          <ion-list-header>History</ion-list-header>
+          <ion-item *ngFor="let h of requestHistory" style="font-size: smaller; min-height: 2.2rem;">
+            <ion-label style="margin: 4px 4px 4px 0;">{{h}}</ion-label>
+          </ion-item>
+        </ion-list>
+
+      </ion-col>
+      <ion-col size-md="1" size-lg="2" size-xl="3" style="height: 1px;"></ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

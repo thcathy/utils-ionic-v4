@@ -14,9 +14,10 @@ import {StockService} from './service/stock.service';
 import {SquoteService} from './service/squote.service';
 import {FundService} from './service/fund.service';
 import {AuthService} from './service/auth.service';
-import {AuthCordovaService} from './service/auth-cordova.service';
 import {AppService} from './service/app.service';
 import {ForumTabPageModule} from './pages/forum-tab/forum-tab.module';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {IdTokenInterceptor} from './interceptor/IdTokenInterceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,10 +36,14 @@ import {ForumTabPageModule} from './pages/forum-tab/forum-tab.module';
     SquoteService,
     FundService,
     AuthService,
-    AuthCordovaService,
     AppService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     NGXLogger,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: IdTokenInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })

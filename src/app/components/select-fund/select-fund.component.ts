@@ -20,9 +20,7 @@ export class SelectFundComponent implements OnChanges {
         public squoteService: SquoteService,
         public fundService: FundService,
         public logger: NGXLogger
-    ) {
-        console.log('Hello SelectFundComponent Component');
-    }
+    ) {}
 
     ngOnChanges(changes: { [propName: string]: SimpleChange }) {
         this.funds = [];
