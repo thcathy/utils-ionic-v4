@@ -6,6 +6,9 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
+import {NGXLogger} from 'ngx-logger';
+import {NGXLoggerSpy} from '../mocks-ionic';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('AppComponent', () => {
 
@@ -20,10 +23,12 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [ RouterTestingModule.withRoutes([]) ],
       providers: [
         { provide: StatusBar, useValue: statusBarSpy },
         { provide: SplashScreen, useValue: splashScreenSpy },
         { provide: Platform, useValue: platformSpy },
+        { provide: NGXLogger, useValue: NGXLoggerSpy() }
       ],
     }).compileComponents();
   });

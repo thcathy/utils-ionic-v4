@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SelectFundComponent } from './select-fund.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {Platform} from '@ionic/angular';
+import {NGXLoggerSpy} from '../../../mocks-ionic';
+import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {SplashScreen} from '@ionic-native/splash-screen/ngx';
+import {NGXLogger} from 'ngx-logger';
 
 describe('SelectFundComponent', () => {
   let component: SelectFundComponent;
@@ -8,7 +14,13 @@ describe('SelectFundComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectFundComponent ]
+      declarations: [ SelectFundComponent ],
+      imports: [
+        HttpClientTestingModule
+      ],
+      providers: [
+        { provide: NGXLogger, useValue: NGXLoggerSpy() }
+      ],
     })
     .compileComponents();
   }));
