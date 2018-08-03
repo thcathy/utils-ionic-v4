@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{type}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let thread of threads" style="font-size: smaller; min-height: 2.2rem;"
+              [class.grey]="thread.visited"
+              [class.wish]="thread.wished">
+      <ion-button fill="outline" slot="start" (click)="addToWishList(thread)">+</ion-button>
+
+      <ion-label style="margin: 4px 4px 4px 0;">
+        <div (click)="onSelectThread(thread)"
+             class="collection-item" style="">
+          <span class="left-align">{{thread.createdDate | date: 'yyyy-MM-dd' }}&nbsp;{{thread.title}}</span>
+          <span hideWhen="android,ios" float-right>{{thread.source}}</span></div>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

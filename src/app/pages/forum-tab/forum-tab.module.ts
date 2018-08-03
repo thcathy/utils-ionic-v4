@@ -8,24 +8,18 @@ import {IonicModule} from '@ionic/angular';
 import {ForumTabPage} from './forum-tab.page';
 import {ForumTabPageRoutingModule} from './forum-tab.router.module';
 import {ForumWishListPageModule} from '../forum-wish-list/forum-wish-list.module';
-
-const routes: Routes = [
-    {
-        path: '',
-        component: ForumTabPage
-    }
-];
+import {ForumThreadsPageModule} from '../forum-threads/forum-threads.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        ForumWishListPageModule,
-        ForumTabPageRoutingModule,
-        RouterModule.forChild(routes)
-    ],
-    declarations: [ForumTabPage]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    ForumWishListPageModule,
+    ForumThreadsPageModule,
+    ForumTabPageRoutingModule
+  ],
+  declarations: [ForumTabPage]
 })
 export class ForumTabPageModule {
 }

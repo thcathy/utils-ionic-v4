@@ -1,8 +1,12 @@
 <ion-tabs>
-  <ion-tab label="Wish List" icon="heart" href="/forum-tab/(wishlist:wishlist)">
+  <ion-tab icon="heart" href="/forum-tab/(wishlist:wishlist)">
     <ion-router-outlet name="wishlist"></ion-router-outlet>
   </ion-tab>
 
-  <!--<ion-tab tabIcon="musical-notes" [root]="musicTab" [rootParams]="musicTabParams"></ion-tab>
-  <ion-tab tabIcon="videocam" [root]="movieTab" [rootParams]="movieTabParams"></ion-tab>-->
+  <ion-tab icon="musical-notes" href="/forum-tab/(music:threads)?type=MUSIC&page=1">
+    <ion-router-outlet name="music"></ion-router-outlet>
+  </ion-tab>
+  <ion-tab icon="videocam" href="/forum-tab/(movie:threads)?type=MOVIE&page=1">
+    <ion-router-outlet name="movie"></ion-router-outlet>
+  </ion-tab>
 </ion-tabs>

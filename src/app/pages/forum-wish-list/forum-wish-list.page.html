@@ -14,7 +14,7 @@
       <ion-col size="12" size-md="10" size-lg="8" size-xl="6">
         <ion-list>
           <ion-item>
-            <ion-label><ion-input type="text" [(ngModel)]="itemText" placeholder="new item"></ion-input></ion-label>
+            <ion-input type="text" [(ngModel)]="itemText" placeholder="new item"></ion-input>
             <ion-button fill="clear" slot="end" (click)="onAdd()"><ion-icon name="add" style="font-size: xx-large;"></ion-icon></ion-button>
           </ion-item>
           <ion-item *ngFor="let item of wishlists" >

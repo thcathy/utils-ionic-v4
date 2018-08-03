@@ -2,6 +2,7 @@ import {Component, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {Fund} from '../../entity/fund';
 import {FundService} from '../../service/fund.service';
 import {AppService} from '../../service/app.service';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-stock-manage-fund',
@@ -16,10 +17,14 @@ export class StockManageFundPage implements OnInit {
   @ViewChild('requestInput') requestInput;
 
   constructor(private fundService: FundService,
-              private appService: AppService) {
+              private appService: AppService,
+              public authService: AuthService) {
   }
 
   ngOnInit() {
+    if (!this.authService.requireAuthenticated()) {
+      return;
+    }
     this.requestUrl = '';
     this.fundService.getFunds().subscribe(
       funds => this.funds = funds,

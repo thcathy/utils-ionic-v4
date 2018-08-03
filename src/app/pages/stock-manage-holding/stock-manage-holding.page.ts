@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {StockHolding} from '../../entity/stock-holding';
 import {AlertController} from '@ionic/angular';
 import {StockService} from '../../service/stock.service';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-stock-manage-holding',
@@ -12,9 +13,14 @@ export class StockManageHoldingPage implements OnInit {
   holdings: StockHolding[];
 
   constructor(public alertController: AlertController,
-              public stockService: StockService) { }
+              public stockService: StockService,
+              public authService: AuthService) { }
 
   ngOnInit() {
+    if (!this.authService.requireAuthenticated()) {
+      return;
+    }
+
     this.stockService.getStockHoldings()
       .then(holdings => this.holdings = holdings);
   }

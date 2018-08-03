@@ -5,14 +5,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ForumWishListPage } from './forum-wish-list.page';
+import { ForumThreadsPage } from './forum-threads.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
+    IonicModule
   ],
-  declarations: [ForumWishListPage]
+  declarations: [ForumThreadsPage]
 })
-export class ForumWishListPageModule {}
+export class ForumThreadsPageModule {}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HoldingStock} from '../../entity/holding-stock';
 import {SquoteService} from '../../service/squote.service';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-stock-create-holding',
@@ -13,12 +14,16 @@ export class StockCreateHoldingPage implements OnInit {
   errorMessage: string;
   createdHolding: HoldingStock;
 
-  constructor(private squoteService: SquoteService) {
+  constructor(private squoteService: SquoteService,
+              private authService: AuthService) {
       this.message = '';
       this.hscei = '';
   }
 
   ngOnInit() {
+    if (!this.authService.requireAuthenticated()) {
+      return;
+    }
   }
 
   onSubmit() {
