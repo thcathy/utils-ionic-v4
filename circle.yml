@@ -1,0 +1,38 @@
+version: 2
+jobs:
+  build:
+      working_directory: ~/code
+      docker:
+        - image: circleci/node:10-browsers
+      steps:
+        - checkout
+        - run:
+            name: update-npm
+            command: 'sudo npm install -g npm@latest'
+        - restore_cache:
+            key: dependency-cache-{{ checksum "package.json" }}
+        - run:
+            name: install-npm-wee
+            command: npm install
+        - save_cache:
+            key: dependency-cache-{{ checksum "package.json" }}
+            paths:
+              - ./node_modules
+        - run:
+            name: test
+            command: npm run test-ci
+workflows:
+  version: 2
+  commit-workflow:
+    jobs:
+      - build
+  scheduled-workflow:
+    triggers:
+      - schedule:
+          cron: "20 5 * * 5"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build

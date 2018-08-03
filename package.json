@@ -1,13 +1,13 @@
 {
   "name": "utils-ionic-v4",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "thcathy@gmail.com",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
+    "test-ci": "ng test --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "node patch.js"
