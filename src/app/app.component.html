@@ -14,8 +14,8 @@
 
             <ion-item-divider><ion-label>forum</ion-label></ion-item-divider>
             <ion-item [routerDirection]="'root'" [routerLink]="['/forum-tab', {outlets: {'wishlist': ['wishlist']}}]"><ion-label>Wish List</ion-label></ion-item>
-            <ion-item [routerDirection]="'root'" [routerLink]="'/forum/abc'"><ion-label>Music</ion-label></ion-item>
-            <ion-item [routerDirection]="'root'" [routerLink]="'/forum/abc'"><ion-label>Movie</ion-label></ion-item>
+            <ion-item [routerDirection]="'root'" [routerLink]="['/forum-tab', {outlets: {'music': ['threads']}}]" [queryParams]="{type:'MUSIC',page:1}"><ion-label>Music</ion-label></ion-item>
+            <ion-item [routerDirection]="'root'" [routerLink]="['/forum-tab', {outlets: {'movie': ['threads']}}]" [queryParams]="{type:'MOVIE',page:1}"><ion-label>Movie</ion-label></ion-item>
 
             <ion-item-divider><ion-label>Quote</ion-label></ion-item-divider>
             <ion-item [routerDirection]="'root'" [routerLink]="'stock-full-quote'"><ion-label>Full Quote</ion-label></ion-item>
