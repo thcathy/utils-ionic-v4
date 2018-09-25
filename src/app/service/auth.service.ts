@@ -50,7 +50,7 @@ export class AuthService {
   }
 
   public login(): void {
-    if (this.appService.isApp()) {
+    if (this.appService.isCordova()) {
       console.log('login by cordova');
       this.loginCordova();
     } else {
@@ -97,8 +97,8 @@ export class AuthService {
         localStorage.setItem('profile', profile);
         this.zone.run(() => {
           this.userProfile = profile;
+          this.router.navigate(['/home']);
         });
-        this.router.navigate(['/home']);
       });
     });
   }

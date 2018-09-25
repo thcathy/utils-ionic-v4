@@ -50,10 +50,10 @@ export class StockFullQuotePage implements OnInit {
             .then(r => this.updateEntryFromResult(r));
     }
 
-    async presentPopover(ev: any) {
+    async presentPopover(event: any) {
         const popover = await this.popoverCtrl.create({
             component: CodePopoverPage,
-            ev: event,
+            event: event,
             componentProps: {parent: this},
         });
         return await popover.present();
@@ -75,7 +75,7 @@ export class StockFullQuotePage implements OnInit {
 
     async showLoading() {
         this.loading = await this.loadingCtrl.create({
-            content: 'Please wait...',
+            message: 'Please wait...',
             duration: 3000
         });
         this.loading.present();

@@ -3,6 +3,7 @@ import {StockHolding} from '../../entity/stock-holding';
 import {AlertController} from '@ionic/angular';
 import {StockService} from '../../service/stock.service';
 import {AuthService} from '../../service/auth.service';
+import {ForumWishItem} from '../../entity/forum-wishlist';
 
 @Component({
   selector: 'app-stock-manage-holding',
@@ -16,7 +17,9 @@ export class StockManageHoldingPage implements OnInit {
               public stockService: StockService,
               public authService: AuthService) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ionViewDidEnter() {
     if (!this.authService.requireAuthenticated()) {
       return;
     }
@@ -41,7 +44,7 @@ export class StockManageHoldingPage implements OnInit {
         },
         {
           text: 'OK',
-          handler: data => {
+          handler: () => {
             this.onDelete(holding);
           }
         }]

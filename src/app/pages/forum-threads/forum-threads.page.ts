@@ -44,7 +44,7 @@ export class ForumThreadsPage implements OnInit {
 
   async showLoading() {
     this.loading = await this.loadingController.create({
-      content: 'Please wait...',
+      message: 'Please wait...',
       duration: 3000
     });
     this.loading.present();

@@ -18,6 +18,8 @@ import {AppService} from './service/app.service';
 import {ForumTabPageModule} from './pages/forum-tab/forum-tab.module';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {IdTokenInterceptor} from './interceptor/IdTokenInterceptor';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +28,8 @@ import {IdTokenInterceptor} from './interceptor/IdTokenInterceptor';
       BrowserModule, IonicModule.forRoot(),
       ForumTabPageModule,
       LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG}),
-      AppRoutingModule
+      AppRoutingModule,
+      ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     StatusBar,

@@ -11,13 +11,9 @@ export class AppService {
       public logger: NGXLogger
   ) { }
 
-  isApp(): boolean {
+  isCordova(): boolean {
     this.logger.error(`platforms: ${this.platform.platforms()}`);
-    if (this.platform.is('core') || this.platform.is('mobileweb') || document.URL.startsWith('http')) {
-      return false;
-    } else {
-      return true;
-    }
+    return this.platform.is('cordova');
   }
 
   handleError(err: HttpErrorResponse) {

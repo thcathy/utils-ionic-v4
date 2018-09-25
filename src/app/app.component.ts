@@ -6,6 +6,7 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AuthService} from './service/auth.service';
 
 import Auth0Cordova from '@auth0/cordova';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent {
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         private authService: AuthService,
+        public router: Router,
     ) {
         this.initializeApp();
         authService.handleAuthentication();
