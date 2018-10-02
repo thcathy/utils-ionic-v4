@@ -3,7 +3,6 @@ import {StockHolding} from '../../entity/stock-holding';
 import {AlertController} from '@ionic/angular';
 import {StockService} from '../../service/stock.service';
 import {AuthService} from '../../service/auth.service';
-import {ForumWishItem} from '../../entity/forum-wishlist';
 
 @Component({
   selector: 'app-stock-manage-holding',
