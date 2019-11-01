@@ -10,11 +10,11 @@ const routes: Routes = [
         path: 'forum-tab',
         component: ForumTabPage,
         children: [
-            {
-                path: 'wishlist',
-                outlet: 'wishlist',
-                component: ForumWishListPage
-            },
+          {
+              path: 'wishlist',
+              outlet: 'wishlist',
+              component: ForumWishListPage
+          },
           {
               path: 'threads',  outlet: 'music', component: ForumThreadsPage
           },
@@ -22,11 +22,6 @@ const routes: Routes = [
             path: 'threads',  outlet: 'movie', component: ForumThreadsPage
           }
         ]
-    },
-    {
-        path: 'forum-tab',
-        redirectTo: '/forum-tab/(wishlist:wishlist)',
-        pathMatch: 'full'
     }
 ];
 
