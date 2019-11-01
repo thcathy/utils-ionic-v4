@@ -53,7 +53,7 @@ export class StockManageFundPage implements OnInit {
 
   onSelectString(text: string) {
     this.requestUrl += text;
-    this.requestInput.focus();
+    this.requestInput.setFocus();
   }
 
 }

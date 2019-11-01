@@ -122,34 +122,22 @@
         <ion-card>
           <ion-card-content style="font-size: smaller;">
             <ion-row>
-              <ion-col size="0" size-lg="1" class="hidden-md-down">day before</ion-col>
-              <ion-col size="3" size-lg="1">date</ion-col>
-              <ion-col size="0" size-lg="3" class="hidden-lg-down">indebtedness + notes + closingBalance + exchangeFund</ion-col>
-              <ion-col size="0" size-lg="1" class="hidden-md-down">total</ion-col>
-              <ion-col size="0" size-lg="1" class="hidden-md-down">change</ion-col>
-              <ion-col size="2" size-lg="1">%</ion-col>
-              <ion-col size="3" size-lg="2">HSI / PE / yield</ion-col>
-              <ion-col size="3" size-lg="2">HSCE / PE / yield</ion-col>
+              <ion-col>day before</ion-col>
+              <ion-col>date</ion-col>
+              <ion-col>HSI / PE / yield</ion-col>
+              <ion-col>HSCE / PE / yield</ion-col>
             </ion-row>
             <ion-row>
-              <ion-col size="0" size-lg="1" class="hidden-md-down">T</ion-col>
-              <ion-col size="3" size-lg="1">{{tbase?.date}}</ion-col>
-              <ion-col size="0" size-lg="3" class="hidden-lg-down">{{tbase?.moneyBase?.indebtedness}} + {{tbase?.moneyBase?.notes}} + {{tbase?.moneyBase?.closingBalance}} + {{tbase?.moneyBase?.exchangeFund}}</ion-col>
-              <ion-col size="0" size-lg="1" class="hidden-md-down">{{tbase?.moneyBase?.total}}</ion-col>
-              <ion-col size="0" size-lg="1" class="hidden-md-down"></ion-col>
-              <ion-col size="2" size-lg="1"></ion-col>
-              <ion-col size="3" size-lg="2">{{tbase?.hsi?.price | number:'1.2-2'}} / {{tbase?.hsi?.pe}} / {{tbase?.hsi?.yield}}</ion-col>
-              <ion-col size="3" size-lg="2">{{tbase?.hscei?.price | number:'1.2-2'}} / {{tbase?.hscei?.pe}} / {{tbase?.hscei?.yield}}</ion-col>
+              <ion-col>T</ion-col>
+              <ion-col>{{tbase?.date}}</ion-col>
+              <ion-col>{{tbase?.hsi?.price | number:'1.2-2'}} / {{tbase?.hsi?.pe}} / {{tbase?.hsi?.yield}}</ion-col>
+              <ion-col>{{tbase?.hscei?.price | number:'1.2-2'}} / {{tbase?.hscei?.pe}} / {{tbase?.hscei?.yield}}</ion-col>
             </ion-row>
             <ion-row *ngFor="let key of reportKeys()">
-              <ion-col size="0" size-lg="1" class="hidden-md-down">{{key}}</ion-col>
-              <ion-col size="3" size-lg="1">{{marketDailyReports[key]?.date}}</ion-col>
-              <ion-col size="0" size-lg="3" class="hidden-lg-down">{{marketDailyReports[key]?.moneyBase?.indebtedness}} + {{marketDailyReports[key]?.moneyBase?.notes}} + {{marketDailyReports[key]?.moneyBase?.closingBalance}} + {{marketDailyReports[key]?.moneyBase?.exchangeFund}}</ion-col>
-              <ion-col size="0" size-lg="1" class="hidden-md-down">{{marketDailyReports[key]?.moneyBase?.total}}</ion-col>
-              <ion-col size="0" size-lg="1" class="hidden-md-down">{{tbase?.moneyBase?.total - marketDailyReports[key]?.moneyBase?.total}}</ion-col>
-              <ion-col size="2" size-lg="1">{{(tbase?.moneyBase?.total - marketDailyReports[key]?.moneyBase?.total)/tbase?.moneyBase?.total*100 | number: '1.2-2'}}</ion-col>
-              <ion-col size="3" size-lg="2">{{marketDailyReports[key]?.hsi?.price | number:'1.2-2'}} / {{marketDailyReports[key]?.hsi?.pe}} / {{marketDailyReports[key]?.hsi?.yield}}</ion-col>
-              <ion-col size="3" size-lg="2">{{marketDailyReports[key]?.hscei?.price | number:'1.2-2'}} / {{marketDailyReports[key]?.hscei?.pe}} / {{marketDailyReports[key]?.hscei?.yield}}</ion-col>
+              <ion-col>{{key}}</ion-col>
+              <ion-col>{{marketDailyReports[key]?.date}}</ion-col>
+              <ion-col>{{marketDailyReports[key]?.hsi?.price | number:'1.2-2'}} / {{marketDailyReports[key]?.hsi?.pe}} / {{marketDailyReports[key]?.hsi?.yield}}</ion-col>
+              <ion-col>{{marketDailyReports[key]?.hscei?.price | number:'1.2-2'}} / {{marketDailyReports[key]?.hscei?.pe}} / {{marketDailyReports[key]?.hscei?.yield}}</ion-col>
             </ion-row>
           </ion-card-content>
         </ion-card>
