@@ -12,14 +12,24 @@ const routes: Routes = [
         children: [
           {
               path: 'wishlist',
-              outlet: 'wishlist',
-              component: ForumWishListPage
+              // outlet: 'wishlist',
+              // component: ForumWishListPage,
+              loadChildren: '../forum-wish-list/forum-wish-list.module#ForumThreadsPageModule'
           },
           {
-              path: 'threads',  outlet: 'music', component: ForumThreadsPage
+              path: 'music',
+              // outlet: 'music', component: ForumThreadsPage
+              loadChildren: '../forum-threads/forum-threads.module#ForumThreadsPageModule'
           },
           {
-            path: 'threads',  outlet: 'movie', component: ForumThreadsPage
+            path: 'movie',
+            // outlet: 'movie', component: ForumThreadsPage
+            loadChildren: '../forum-threads/forum-threads.module#ForumThreadsPageModule'
+          },
+          {
+            path: '',
+            redirectTo: '/forum-tab/wishlist',
+            pathMatch: 'full'
           }
         ]
     }

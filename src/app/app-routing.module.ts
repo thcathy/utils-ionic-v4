@@ -3,11 +3,11 @@ import {Routes, RouterModule} from '@angular/router';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: 'home', loadChildren: './pages/home/home.module#HomePageModule'},
-  {path: 'stock-full-quote', loadChildren: './pages/stock-full-quote/stock-full-quote.module#StockFullQuotePageModule'},
-  {path: 'stock-create-holding', loadChildren: './pages/stock-create-holding/stock-create-holding.module#StockCreateHoldingPageModule'},
-  {path: 'stock-manage-holding', loadChildren: './pages/stock-manage-holding/stock-manage-holding.module#StockManageHoldingPageModule'},
-  {path: 'stock-manage-fund', loadChildren: './pages/stock-manage-fund/stock-manage-fund.module#StockManageFundPageModule'},
+  {path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)},
+  {path: 'stock-full-quote', loadChildren: () => import('./pages/stock-full-quote/stock-full-quote.module').then(m => m.StockFullQuotePageModule)},
+  {path: 'stock-create-holding', loadChildren: () => import('./pages/stock-create-holding/stock-create-holding.module').then(m => m.StockCreateHoldingPageModule)},
+  {path: 'stock-manage-holding', loadChildren: () => import('./pages/stock-manage-holding/stock-manage-holding.module').then(m => m.StockManageHoldingPageModule)},
+  {path: 'stock-manage-fund', loadChildren: () => import('./pages/stock-manage-fund/stock-manage-fund.module').then(m => m.StockManageFundPageModule)},
 
 ];
 

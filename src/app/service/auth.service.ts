@@ -2,7 +2,6 @@ import {Injectable, NgZone} from '@angular/core';
 import Auth0Cordova from '@auth0/cordova';
 import Auth0 from 'auth0-js';
 import {AppService} from './app.service';
-import {App, NavController} from '@ionic/angular';
 import {Router} from '@angular/router';
 
 const auth0CordovaConfig = {

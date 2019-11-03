@@ -1,23 +1,15 @@
 <ion-tabs>
-  <ion-tab tab="wishlist">
-    <ion-router-outlet name="wishlist"></ion-router-outlet>
-  </ion-tab>
-  <ion-tab tab="music">
-    <ion-router-outlet name="music"></ion-router-outlet>
-  </ion-tab>
-  <ion-tab tab="movie">
-    <ion-router-outlet name="movie"></ion-router-outlet>
-  </ion-tab>
 
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="wishlist" href="/forum-tab/(wishlist:wishlist)">
+    <ion-tab-button tab="wishlist">
       <ion-icon name="list"></ion-icon>
     </ion-tab-button>
-    <ion-tab-button tab="music" href="/forum-tab/(music:threads)?type=MUSIC&page=1">
+    <ion-tab-button tab="music">
       <ion-icon name="musical-notes"></ion-icon>
     </ion-tab-button>
-    <ion-tab-button tab="movie" href="/forum-tab/(movie:threads)?type=MOVIE&page=1">
+    <ion-tab-button tab="movie">
       <ion-icon name="videocam"></ion-icon>
     </ion-tab-button>
   </ion-tab-bar>
+
 </ion-tabs>

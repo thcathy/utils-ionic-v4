@@ -14,7 +14,7 @@ export class StockManageFundPage implements OnInit {
   requestUrl: string;
   requestHistory: string[] = [];
   result: string;
-  @ViewChild('requestInput') requestInput;
+  @ViewChild('requestInput', { static: true }) requestInput;
 
   constructor(private fundService: FundService,
               private appService: AppService,
