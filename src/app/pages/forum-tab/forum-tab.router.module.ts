@@ -12,19 +12,35 @@ const routes: Routes = [
         children: [
           {
               path: 'wishlist',
+              children: [
+                {
+                  path: '',
+                  loadChildren: '../forum-wish-list/forum-wish-list.module#ForumWishListPageModule'
+                }
+              ]
               // outlet: 'wishlist',
               // component: ForumWishListPage,
-              loadChildren: '../forum-wish-list/forum-wish-list.module#ForumThreadsPageModule'
           },
           {
               path: 'music',
               // outlet: 'music', component: ForumThreadsPage
-              loadChildren: '../forum-threads/forum-threads.module#ForumThreadsPageModule'
+            children: [
+              {
+                path: '',
+                loadChildren: '../forum-threads/forum-threads.module#ForumThreadsPageModule'
+              }
+            ]
+
           },
           {
             path: 'movie',
             // outlet: 'movie', component: ForumThreadsPage
-            loadChildren: '../forum-threads/forum-threads.module#ForumThreadsPageModule'
+            children: [
+              {
+                path: '',
+                loadChildren: '../forum-threads/forum-threads.module#ForumThreadsPageModule'
+              }
+            ]
           },
           {
             path: '',

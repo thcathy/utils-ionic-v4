@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, RouteReuseStrategy, Routes } from '@angular/router';
+import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -16,7 +16,7 @@ import {FundService} from './service/fund.service';
 import {AuthService} from './service/auth.service';
 import {AppService} from './service/app.service';
 import {ForumTabPageModule} from './pages/forum-tab/forum-tab.module';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpBackend, HttpClientModule} from '@angular/common/http';
 import {IdTokenInterceptor} from './interceptor/IdTokenInterceptor';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -26,6 +26,7 @@ import { environment } from '../environments/environment';
   entryComponents: [],
   imports: [
       BrowserModule, IonicModule.forRoot(),
+      HttpClientModule,
       ForumTabPageModule,
       LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG}),
       AppRoutingModule,
