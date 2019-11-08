@@ -15,7 +15,6 @@ import {SquoteService} from './service/squote.service';
 import {FundService} from './service/fund.service';
 import {AuthService} from './service/auth.service';
 import {AppService} from './service/app.service';
-import {ForumTabPageModule} from './pages/forum-tab/forum-tab.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {IdTokenInterceptor} from './interceptor/IdTokenInterceptor';
 import { ServiceWorkerModule } from '@angular/service-worker';
