@@ -16,7 +16,7 @@ import {FundService} from './service/fund.service';
 import {AuthService} from './service/auth.service';
 import {AppService} from './service/app.service';
 import {ForumTabPageModule} from './pages/forum-tab/forum-tab.module';
-import {HTTP_INTERCEPTORS, HttpBackend, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {IdTokenInterceptor} from './interceptor/IdTokenInterceptor';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -27,7 +27,6 @@ import { environment } from '../environments/environment';
   imports: [
       BrowserModule, IonicModule.forRoot(),
       HttpClientModule,
-      ForumTabPageModule,
       LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG}),
       AppRoutingModule,
       ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })

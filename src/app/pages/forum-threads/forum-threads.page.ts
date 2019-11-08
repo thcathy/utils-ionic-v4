@@ -5,6 +5,7 @@ import {ForumService} from '../../service/forum.service';
 import {LoadingController} from '@ionic/angular';
 import {ActivatedRoute} from '@angular/router';
 import {NGXLogger} from 'ngx-logger';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-forum-threads',
@@ -27,12 +28,14 @@ export class ForumThreadsPage implements OnInit {
               public logger: NGXLogger) {
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ionViewWillEnter() {
     this.threads = this.DEFAULT_THREAD;
     this.showLoading();
-    this.logger.info(`queryParams: ${JSON.stringify(this.route.snapshot.queryParams)}`);
-    this.type = this.route.snapshot.queryParams['type'];
-    this.forumService.getForumThreads(this.type, this.route.snapshot.queryParams['page'])
+    this.type = this.route.snapshot.paramMap.get('type');
+    this.logger.info(`ionViewWillEnter params: ${JSON.stringify(this.route.snapshot.paramMap)}`);
+    this.forumService.getForumThreads(this.type, Number(this.route.snapshot.paramMap.get('page')))
       .subscribe(
         data => {
           this.threads = data;

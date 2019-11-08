@@ -17,6 +17,7 @@ export class ForumService {
   constructor (private http: HttpClient) {}
 
   getForumThreads(type: String, page: number): Observable<ForumThread[]> {
+    console.log(`${type}, ${page}`);
     return this.http.get<ForumThread[]>(this.LIST_URL + type + '/' + page);
   }
 

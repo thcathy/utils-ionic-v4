@@ -26,7 +26,7 @@ export class ForumWishListPage implements OnInit {
         }
 
         this.forumService.getWishList().then(
-            lists => this.wishlists = lists
+          lists => this.wishlists = lists
         );
     }
 
