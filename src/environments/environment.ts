@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 export const environment = {
     production: false,
-    apiHost: 'https://squote.funfunspell.com'
+    apiHost: 'http://ubuntu.local:8090'
     // apiHost: 'http://192.168.0.150:8090'
 };
 

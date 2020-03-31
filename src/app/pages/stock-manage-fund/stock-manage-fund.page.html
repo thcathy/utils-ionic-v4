@@ -75,7 +75,7 @@
         <p>{{result}}</p>
 
         <ion-list *ngIf="requestHistory.length > 0">
-          <ion-list-header>History</ion-list-header>
+          <ion-list-header><ion-label>History</ion-label></ion-list-header>
           <ion-item *ngFor="let h of requestHistory" style="font-size: smaller; min-height: 2.2rem;">
             <ion-label style="margin: 4px 4px 4px 0;">{{h}}</ion-label>
           </ion-item>
