@@ -28,7 +28,8 @@ import { environment } from '../environments/environment';
       HttpClientModule,
       LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG}),
       AppRoutingModule,
-      ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+      ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+      ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     StatusBar,
