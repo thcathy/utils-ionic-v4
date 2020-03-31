@@ -18,7 +18,7 @@
         <div (click)="onSelectThread(thread)"
              class="collection-item" style="">
           <span class="left-align">{{thread.createdDate | date: 'yyyy-MM-dd' }}&nbsp;{{thread.title}}</span>
-          <span hideWhen="android,ios" float-right>{{thread.source}}</span></div>
+          <span hideWhen="android,ios" class="ion-float-right">{{thread.source}}</span></div>
       </ion-label>
     </ion-item>
   </ion-list>

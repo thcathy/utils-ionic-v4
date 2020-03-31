@@ -8,9 +8,18 @@
       <ion-content>
         <ion-list>
           <ion-menu-toggle auto-hide="false">
-            <ion-item (click)="this.router.navigate(['/home'])"><ion-label>Home</ion-label></ion-item>
-            <ion-item *ngIf="!isAuthenticated()" (click)="login()"><ion-label><ion-icon name="log-in"></ion-icon> Login</ion-label></ion-item>
-            <ion-item *ngIf="isAuthenticated()" (click)="logout()"><ion-label><ion-icon name="log-out"></ion-icon> Logout</ion-label></ion-item>
+            <ion-item (click)="this.router.navigate(['/home'])">
+              <ion-label>Home</ion-label>
+              <ion-icon name="home-outline" slot="end"></ion-icon>
+            </ion-item>
+            <ion-item *ngIf="!isAuthenticated()" (click)="login()">
+              <ion-icon name="log-in-outline" slot="end"></ion-icon>
+              <ion-label>Login</ion-label>
+            </ion-item>
+            <ion-item *ngIf="isAuthenticated()" (click)="logout()">
+              <ion-icon name="log-out-outline" slot="end"></ion-icon>
+              <ion-label>Logout</ion-label>
+            </ion-item>
 
             <ion-item-divider><ion-label>forum</ion-label></ion-item-divider>
             <ion-item (click)="this.router.navigate(['/forum/wishlist'])"><ion-label>Wish List</ion-label></ion-item>
