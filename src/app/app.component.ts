@@ -7,6 +7,9 @@ import {AuthService} from './service/auth.service';
 
 import Auth0Cordova from '@auth0/cordova';
 import {Router} from '@angular/router';
+import { Plugins } from '@capacitor/core';
+
+const { App } = Plugins;
 
 @Component({
     selector: 'app-root',
@@ -21,18 +24,30 @@ export class AppComponent {
         private authService: AuthService,
         public router: Router,
     ) {
-        this.initializeApp();
         authService.handleAuthentication();
+        this.initializeApp();
     }
 
     initializeApp() {
+        console.log(`${this.platform.platforms()}`);
+        console.log(`start initializeApp`);
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
         });
 
-        (<any>window).handleOpenURL = (url) => {
-            Auth0Cordova.onRedirectUri(url);
+        App.addListener('appUrlOpen', (data: any) => {
+            console.log('App opened with URL: ' +  data.url);
+            Auth0Cordova.onRedirectUri(data.url);
+        });
+
+        Storage.prototype.setObject = function(key, value) {
+            this.setItem(key, JSON.stringify(value));
+        };
+
+        Storage.prototype.getObject = function(key) {
+            const value = this.getItem(key);
+            return value && JSON.parse(value);
         };
     }
 

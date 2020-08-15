@@ -19,17 +19,18 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {IdTokenInterceptor} from './interceptor/IdTokenInterceptor';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import {ComponentsModule} from './components/components.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-      BrowserModule, IonicModule.forRoot(),
-      HttpClientModule,
-      LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG}),
-      AppRoutingModule,
-      ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
-      ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    BrowserModule, IonicModule.forRoot(),
+    HttpClientModule,
+    LoggerModule.forRoot({level: NgxLoggerLevel.DEBUG}),
+    AppRoutingModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}), ComponentsModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     StatusBar,

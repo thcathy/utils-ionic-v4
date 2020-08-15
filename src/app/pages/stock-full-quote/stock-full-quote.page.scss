@@ -1,10 +1,15 @@
 
-ion-card {
+ion-row {
   padding: 2px;
-  margin: 4px;
-  width: 98%;
+  font-weight: 200;
 }
 
 ion-col {
   padding: 0px 4px;
+}
+
+.card {
+  border-bottom: lightgrey solid 1px !important;
+  margin-bottom: 4px;
+  padding-bottom: 4px;
 }

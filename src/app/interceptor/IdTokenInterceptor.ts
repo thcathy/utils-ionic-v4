@@ -6,6 +6,7 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import {Observable} from 'rxjs/internal/Observable';
+import {AuthService, Session} from '../service/auth.service';
 
 @Injectable()
 export class IdTokenInterceptor implements HttpInterceptor {
@@ -13,12 +14,12 @@ export class IdTokenInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const idToken = localStorage.getItem('id_token');
+    const session = localStorage.getObject(AuthService.sessionKey) as Session;
 
-    if (idToken) {
+    if (session) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${idToken}`
+          Authorization: `Bearer ${session.idToken}`
         }
       });
     }

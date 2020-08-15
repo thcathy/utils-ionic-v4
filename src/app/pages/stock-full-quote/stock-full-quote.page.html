@@ -5,6 +5,7 @@
     </ion-buttons>
     <ion-title>Full Quote</ion-title>
   </ion-toolbar>
+  <ion-progress-bar type="indeterminate" *ngIf="inProgress"></ion-progress-bar>
 </ion-header>
 
 <ion-content>
@@ -30,120 +31,94 @@
   </ion-fab>
 
   <ion-grid>
-    <ion-row>
+    <ion-row style="font-size: smaller;">
       <ion-col size="12" size-md="6" size-lg="6">
-        <ion-card>
-          <ion-card-content style="font-size: smaller;">
-            <ion-row *ngFor="let q of stockQuotes">
-              <ion-col size="2" size-lg="1">{{q.stockCode}}</ion-col>
-              <ion-col size="2" size-lg="2" text-right>{{q.price | number: '1.2-2'}}</ion-col>
-              <ion-col size="0" size-lg="2" class="hidden-md-down" text-right>{{q.changeAmount}}</ion-col>
-              <ion-col size="3" size-lg="2" text-right>{{q.change}}</ion-col>
-              <ion-col size="5" size-lg="3" text-right>{{q.low}}-{{q.high}}</ion-col>
-              <ion-col size="0" size-lg="2" class="hidden-md-down" text-right>{{q.lastUpdate.split(' ')[1]}}</ion-col>
-            </ion-row>
-          </ion-card-content>
-        </ion-card>
+        <div class="card">
+          <ion-row *ngFor="let q of stockQuotes">
+            <ion-col size="2" size-lg="1">{{q.stockCode}}</ion-col>
+            <ion-col size="2" size-lg="2" text-right>{{q.price | number: '1.2-2'}}</ion-col>
+            <ion-col size="0" size-lg="2" class="hidden-md-down" text-right>{{q.changeAmount}}</ion-col>
+            <ion-col size="3" size-lg="2" text-right>{{q.change}}</ion-col>
+            <ion-col size="5" size-lg="3" text-right>{{q.low}}-{{q.high}}</ion-col>
+            <ion-col size="0" size-lg="2" class="hidden-md-down" text-right>{{q.lastUpdate.split(' ')[1]}}</ion-col>
+          </ion-row>
+        </div>
+        <div class="card">
+          <ion-row *ngFor="let q of indexQuotes">
+            <ion-col size="4" size-md="2" size-lg="2">{{q.stockCode}}</ion-col>
+            <ion-col size="4" size-md="3" size-lg="2" text-right>{{q.price}}</ion-col>
+            <ion-col size="4" size-md="2" size-lg="2" text-right>{{q.change}}</ion-col>
+            <ion-col size="3" size-md="5" size-lg="6" class="hidden-sm-down" text-right>{{q.low}} - {{q.high}}</ion-col>
+          </ion-row>
+        </div>
+        <div class="card">
+          <ion-row *ngFor="let holding of holdings">
+            <ion-col size="2" size-sm="2" size-lg="1" size-xl="1">{{holding.code}}</ion-col>
+            <ion-col size="2" size-sm="2" size-lg="2" size-xl="2" text-right>{{relativePerformance(holding, allQuotes[holding.code].price, hsce.price) | number: '1.2-2'}}</ion-col>
+            <ion-col size="3" size-sm="2" size-lg="2" size-xl="2" text-right><span *ngIf="holding.side == 'BUY'">{{changePercentage(holding.price, allQuotes[holding.code].price) | number: '1.2-2'}}%</span></ion-col>
+            <ion-col size="2" size-sm="1" size-lg="1" size-xl="1">{{holding.side}}</ion-col>
+            <ion-col size="3" size-sm="2" size-lg="2" size-xl="1" text-right>{{holding.price | number: '1.2-2'}}</ion-col>
+            <ion-col size="0" size-sm="3" size-lg="2" size-xl="2" class="hidden-xs-down" text-right>${{holding.gross | number: '1.0'}}</ion-col>
+            <ion-col size="0" size-sm="0" size-lg="0" size-xl="1" class="hidden-lg-down" text-right>{{holding.quantity}}</ion-col>
+            <ion-col size="0" size-sm="0" size-lg="2" size-xl="2" class="hidden-md-down" text-right>{{holding.date | date: 'yyyy-MM-dd'}}</ion-col>
+          </ion-row>
+        </div>
       </ion-col>
 
       <ion-col size="12" size-md="6" size-lg="6">
-        <ion-card>
-          <ion-card-content style="font-size: smaller;">
-            <ion-row *ngFor="let holding of holdings">
-              <ion-col size="2" size-sm="2" size-lg="1" size-xl="1">{{holding.code}}</ion-col>
-              <ion-col size="2" size-sm="2" size-lg="2" size-xl="2" text-right>{{relativePerformance(holding, allQuotes[holding.code].price, hsce.price) | number: '1.2-2'}}</ion-col>
-              <ion-col size="3" size-sm="2" size-lg="2" size-xl="2" text-right><span *ngIf="holding.side == 'BUY'">{{changePercentage(holding.price, allQuotes[holding.code].price) | number: '1.2-2'}}%</span></ion-col>
-              <ion-col size="2" size-sm="1" size-lg="1" size-xl="1">{{holding.side}}</ion-col>
-              <ion-col size="3" size-sm="2" size-lg="2" size-xl="1" text-right>{{holding.price | number: '1.2-2'}}</ion-col>
-              <ion-col size="0" size-sm="3" size-lg="2" size-xl="2" class="hidden-xs-down" text-right>${{holding.gross | number: '1.0'}}</ion-col>
-              <ion-col size="0" size-sm="0" size-lg="0" size-xl="1" class="hidden-lg-down" text-right>{{holding.quantity}}</ion-col>
-              <ion-col size="0" size-sm="0" size-lg="2" size-xl="2" class="hidden-md-down" text-right>{{holding.date | date: 'yyyy-MM-dd'}}</ion-col>
-            </ion-row>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-
-      <ion-col size="12" size-md="6" size-lg="6">
-        <ion-card>
-          <ion-card-content style="font-size: smaller;">
-            <ion-row *ngFor="let q of indexQuotes">
-              <ion-col size="4" size-md="2" size-lg="2">{{q.stockCode}}</ion-col>
-              <ion-col size="4" size-md="3" size-lg="2" text-right>{{q.price}}</ion-col>
-              <ion-col size="4" size-md="2" size-lg="2" text-right>{{q.change}}</ion-col>
-              <ion-col size="3" size-md="5" size-lg="6" class="hidden-sm-down" text-right>{{q.low}} - {{q.high}}</ion-col>
-            </ion-row>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-    <hr />
-    <ion-row>
-      <ion-col size="12" size-md="6" size-lg="6" *ngFor="let fund of funds">
-        <ion-card>
-          <ion-card-header style="font-size: small;">
-            <ion-row>
-              <ion-col>{{fund.name}}</ion-col>
-              <ion-col>{{fund.profit | number: '1.0'}}</ion-col>
-              <ion-col>{{fund.netProfit + fund.profit | number: '1.0'}}</ion-col>
-            </ion-row>
-          </ion-card-header>
-          <ion-card-content style="font-size: smaller;">
-            <ion-row>
-              <ion-col size="2" size-lg="1"></ion-col>
-              <ion-col size="0" size-lg="2" class="hidden-md-down"></ion-col>
-              <ion-col size="0" size-lg="2" class="hidden-md-down"></ion-col>
-              <ion-col size="4" size-lg="3" text-right>{{fundGross(fund) | number: '1.0-0'}}</ion-col>
-              <ion-col size="3" size-lg="2" text-right>{{fund.netProfit | number: '1.0-0'}}</ion-col>
-              <ion-col size="3" size-lg="2" text-right>{{fund.netProfit/(fundGross(fund)+1)*100 | number: '1.2-2'}}%</ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="2" size-lg="1">code</ion-col>
-              <ion-col size="0" size-lg="2" class="hidden-md-down" text-right>qty</ion-col>
-              <ion-col size="0" size-lg="2" class="hidden-md-down" text-right>price</ion-col>
-              <ion-col size="4" size-lg="3" text-right>gross</ion-col>
-              <ion-col size="3" size-lg="2" text-right>+/-</ion-col>
-              <ion-col size="3" size-lg="2" text-right>%</ion-col>
-            </ion-row>
-            <ion-row *ngFor="let key of fundHoldingKeys(fund)">
-              <ion-col size="2" size-lg="1">{{key}}</ion-col>
-              <ion-col size="0" size-lg="2" class="hidden-md-down" text-right>{{fund.holdings[key].quantity}}</ion-col>
-              <ion-col size="0" size-lg="2" class="hidden-md-down" text-right>{{fund.holdings[key].price}}</ion-col>
-              <ion-col size="4" size-lg="3" text-right>{{fund.holdings[key].gross | number: '1.0-0'}}</ion-col>
-              <ion-col size="3" size-lg="2" text-right>{{fund.holdings[key].netProfit | number: '1.0-0'}}</ion-col>
-              <ion-col size="3" size-lg="2" text-right>{{fund.holdings[key].netProfit/fund.holdings[key].gross*100 | number: '1.2-2'}}%</ion-col>
-            </ion-row>
-          </ion-card-content>
-        </ion-card>
+        <div class="card" *ngFor="let fund of funds">
+          <ion-row>
+            <ion-col>{{fund.name}}</ion-col>
+            <ion-col>{{fund.profit | number: '1.0'}}</ion-col>
+            <ion-col>{{fund.netProfit + fund.profit | number: '1.0'}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="2" size-lg="1"></ion-col>
+            <ion-col size="0" size-lg="2" class="hidden-md-down"></ion-col>
+            <ion-col size="0" size-lg="2" class="hidden-md-down"></ion-col>
+            <ion-col size="4" size-lg="3" text-right>{{fundGross(fund) | number: '1.0-0'}}</ion-col>
+            <ion-col size="3" size-lg="2" text-right>{{fund.netProfit | number: '1.0-0'}}</ion-col>
+            <ion-col size="3" size-lg="2" text-right>{{fund.netProfit/(fundGross(fund)+1)*100 | number: '1.2-2'}}%</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="2" size-lg="1">code</ion-col>
+            <ion-col size="0" size-lg="2" class="hidden-md-down" text-right>qty</ion-col>
+            <ion-col size="0" size-lg="2" class="hidden-md-down" text-right>price</ion-col>
+            <ion-col size="4" size-lg="3" text-right>gross</ion-col>
+            <ion-col size="3" size-lg="2" text-right>+/-</ion-col>
+            <ion-col size="3" size-lg="2" text-right>%</ion-col>
+          </ion-row>
+          <ion-row *ngFor="let key of fundHoldingKeys(fund)">
+            <ion-col size="2" size-lg="1">{{key}}</ion-col>
+            <ion-col size="0" size-lg="2" class="hidden-md-down" text-right>{{fund.holdings[key].quantity}}</ion-col>
+            <ion-col size="0" size-lg="2" class="hidden-md-down" text-right>{{fund.holdings[key].price}}</ion-col>
+            <ion-col size="4" size-lg="3" text-right>{{fund.holdings[key].gross | number: '1.0-0'}}</ion-col>
+            <ion-col size="3" size-lg="2" text-right>{{fund.holdings[key].netProfit | number: '1.0-0'}}</ion-col>
+            <ion-col size="3" size-lg="2" text-right>{{fund.holdings[key].netProfit/fund.holdings[key].gross*100 | number: '1.2-2'}}%</ion-col>
+          </ion-row>
+        </div>
+        <div class="card">
+          <ion-row>
+            <ion-col size="2">day before</ion-col>
+            <ion-col size="2">date</ion-col>
+            <ion-col size="4">HSI / PE / yield</ion-col>
+            <ion-col size="4">HSCE / PE / yield</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="2">T</ion-col>
+            <ion-col size="2">{{tbase?.date}}</ion-col>
+            <ion-col size="4">{{tbase?.hsi?.price | number:'1.2-2'}} / {{tbase?.hsi?.pe}} / {{tbase?.hsi?.yield}}</ion-col>
+            <ion-col size="4">{{tbase?.hscei?.price | number:'1.2-2'}} / {{tbase?.hscei?.pe}} / {{tbase?.hscei?.yield}}</ion-col>
+          </ion-row>
+          <ion-row *ngFor="let key of reportKeys()">
+            <ion-col size="2">{{key}}</ion-col>
+            <ion-col size="2">{{marketDailyReports[key]?.date}}</ion-col>
+            <ion-col size="4">{{marketDailyReports[key]?.hsi?.price | number:'1.2-2'}} / {{marketDailyReports[key]?.hsi?.pe}} / {{marketDailyReports[key]?.hsi?.yield}}</ion-col>
+            <ion-col size="4">{{marketDailyReports[key]?.hscei?.price | number:'1.2-2'}} / {{marketDailyReports[key]?.hscei?.pe}} / {{marketDailyReports[key]?.hscei?.yield}}</ion-col>
+          </ion-row>
+        </div>
       </ion-col>
     </ion-row>
-    <hr />
-    <ion-row>
-      <ion-col size="12">
-        <ion-card>
-          <ion-card-content style="font-size: smaller;">
-            <ion-row>
-              <ion-col>day before</ion-col>
-              <ion-col>date</ion-col>
-              <ion-col>HSI / PE / yield</ion-col>
-              <ion-col>HSCE / PE / yield</ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>T</ion-col>
-              <ion-col>{{tbase?.date}}</ion-col>
-              <ion-col>{{tbase?.hsi?.price | number:'1.2-2'}} / {{tbase?.hsi?.pe}} / {{tbase?.hsi?.yield}}</ion-col>
-              <ion-col>{{tbase?.hscei?.price | number:'1.2-2'}} / {{tbase?.hscei?.pe}} / {{tbase?.hscei?.yield}}</ion-col>
-            </ion-row>
-            <ion-row *ngFor="let key of reportKeys()">
-              <ion-col>{{key}}</ion-col>
-              <ion-col>{{marketDailyReports[key]?.date}}</ion-col>
-              <ion-col>{{marketDailyReports[key]?.hsi?.price | number:'1.2-2'}} / {{marketDailyReports[key]?.hsi?.pe}} / {{marketDailyReports[key]?.hsi?.yield}}</ion-col>
-              <ion-col>{{marketDailyReports[key]?.hscei?.price | number:'1.2-2'}} / {{marketDailyReports[key]?.hscei?.pe}} / {{marketDailyReports[key]?.hscei?.yield}}</ion-col>
-            </ion-row>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
   </ion-grid>
 
 </ion-content>

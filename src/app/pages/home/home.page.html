@@ -3,13 +3,21 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Home</ion-title>
+    <ion-title>THC Utility</ion-title>
   </ion-toolbar>
 </ion-header>
 
 
-<ion-content class="ion-padding">
+<ion-content>
+  <div style="max-width: 400px; margin: auto;">
+    <ion-list>
+      <app-menu-item link="/stock-full-quote" title="Full Quote"></app-menu-item>
 
-  <h3>Welcome to Ionic app by THC!</h3>
+      <ion-list-header><ion-label>Stock Management</ion-label></ion-list-header>
+      <app-menu-item link="/stock-create-holding" title="Create Holding"></app-menu-item>
+      <app-menu-item link="/stock-manage-holding" title="Manage Holding"></app-menu-item>
+      <app-menu-item link="/stock-manage-fund" title="Manage Fund"></app-menu-item>
+    </ion-list>
+  </div>
 
 </ion-content>

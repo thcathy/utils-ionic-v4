@@ -23,17 +23,14 @@ export class StockFullQuotePage implements OnInit {
 
     codes: string;
     inProgress: boolean;
-    loading: any;
 
     constructor(private stockService: StockService,
-                public loadingCtrl: LoadingController,
                 private popoverCtrl: PopoverController,
                 private toastCtrl: ToastController) {
     }
 
     ngOnInit() {
         this.inProgress = true;
-        this.showLoading();
 
         this.codes = localStorage.getItem('codes');
 
@@ -68,22 +65,12 @@ export class StockFullQuotePage implements OnInit {
         this.funds = result['funds'];
         this.codes = result['codes'];
         this.inProgress = false;
-        this.loading.dismiss();
 
         console.log(`Funds: ${JSON.stringify(this.funds)}`);
     }
 
-    async showLoading() {
-        this.loading = await this.loadingCtrl.create({
-            message: 'Please wait...',
-            duration: 3000
-        });
-        this.loading.present();
-    }
-
     public onSubmit() {
         this.inProgress = true;
-        this.showLoading();
         localStorage.setItem('codes', this.codes);
 
         this.stockService.getFullQuote(this.codes)

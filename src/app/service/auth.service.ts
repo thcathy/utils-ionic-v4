@@ -1,6 +1,7 @@
 import {Injectable, NgZone} from '@angular/core';
 import Auth0Cordova from '@auth0/cordova';
 import Auth0 from 'auth0-js';
+import * as jwt_decode from 'jwt-decode';
 import {AppService} from './app.service';
 import {Router} from '@angular/router';
 
@@ -16,14 +17,16 @@ const auth0CordovaConfig = {
   scope: 'openid profile'
 };
 
+export class Session {
+  idToken: string;
+  accessToken: string;
+  expiresAt: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  userProfile: any;
-  idTokenKey = 'id_token';
-  expiresAtKey = 'expires_at';
-  accessTokenKey = 'access_token';
-  accessToken: string;
-  idToken: string;
+  static sessionKey = 'thc_session';
+  auth0Cordova = new Auth0.WebAuth(auth0CordovaConfig);
 
   auth0 = new Auth0.WebAuth({
     clientID: 'mBv3zeOBD6Wl2NI2zMzeJFO8kZU7XyJl',
@@ -34,18 +37,9 @@ export class AuthService {
     scope: 'openid profile'
   });
 
-  auth0Cordova = new Auth0.WebAuth(auth0CordovaConfig);
-
-
   constructor(private zone: NgZone,
               private appService: AppService,
               private router: Router) {
-    try {
-      this.userProfile = localStorage.getItem('profile');
-      this.idToken = localStorage.getItem(this.idTokenKey);
-    } catch (e) {
-      localStorage.setItem(this.idTokenKey, null);
-    }
   }
 
   public login(): void {
@@ -62,88 +56,52 @@ export class AuthService {
   public handleAuthentication(): void {
     console.log('handleAuthentication');
     this.auth0.parseHash((err, authResult) => {
-      console.log(`handleAuthentication: err ${err}, result ${authResult}`);
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        window.location.hash = '';
-        this.setSession(authResult);
-        this.router.navigate(['/home']);
-        this.getProfile((e, profile) => {
-          console.warn(`cannot get profile: ${e}`);
-        });
-      } else if (err) {
-        this.router.navigate(['/home']);
-        console.log(err);
+      if (err) {
+        console.error(`${JSON.stringify(err)}`);
+        return;
       }
+      this.onAuthSuccess(authResult);
     });
+  }
+
+  public onAuthSuccess(authResult) {
+    if (authResult && authResult.accessToken && authResult.idToken) {
+      window.location.hash = '';
+      this.setSession(authResult);
+      this.router.navigate(['/home']);
+    }
   }
 
   public loginCordova() {
     const client = new Auth0Cordova(auth0CordovaConfig);
-    const options = { scope: 'openid profile offline_access' };
+    const options = { scope: 'openid profile offline_access email' };
 
     client.authorize(options, (err, authResult) => {
       if (err) {
         throw err;
       }
-      this.setSession(authResult);
-      this.auth0Cordova.client.userInfo(this.accessToken, (err, profile) => {
-        if (err) {
-          this.router.navigate(['/home']);
-          throw err;
-        }
-
-        profile.user_metadata = profile.user_metadata || {};
-        localStorage.setItem('profile', profile);
-        this.zone.run(() => {
-          this.userProfile = profile;
-          this.router.navigate(['/home']);
-        });
-      });
+      this.onAuthSuccess(authResult);
     });
   }
 
   private setSession(authResult): void {
-    console.log('login session: update session');
-    // Set the time that the access token will expire at
-    const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-    console.info(`expiresAt: ${expiresAt}`);
-
-    localStorage.setItem(this.accessTokenKey, authResult.accessToken);
-    localStorage.setItem(this.idTokenKey, authResult.idToken);
-    localStorage.setItem(this.expiresAtKey, expiresAt);
+    const session = new Session();
+    session.accessToken = authResult.accessToken;
+    session.idToken = authResult.idToken;
+    const decodeIdToken = jwt_decode(authResult.idToken);
+    session.expiresAt = decodeIdToken['exp'] * 1000;
+    console.log(`session: ${JSON.stringify(session)}`);
+    localStorage.setObject(AuthService.sessionKey, session);
   }
 
   public logout(): void {
-    // Remove tokens and expiry time from localStorage
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
-    // Go back to the home route
+    localStorage.removeItem(AuthService.sessionKey);
     this.router.navigate(['/home']);
-    this.userProfile = null;
   }
 
   public isAuthenticated(): boolean {
-    // Check whether the current time is past the
-    // access token's expiry time
-    const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-    return Date.now() < expiresAt;
-  }
-
-  public getProfile(cb): void {
-    const accessToken = localStorage.getItem('access_token');
-    if (!accessToken) {
-      throw new Error('Access token must exist to fetch profile');
-    }
-
-    const self = this;
-    this.auth0.client.userInfo(accessToken, (err, profile) => {
-      if (profile) {
-        console.log(`user profile: ${JSON.stringify(profile)}`);
-        self.userProfile = profile;
-      }
-      cb(err, profile);
-    });
+    const session = localStorage.getObject(AuthService.sessionKey) as Session;
+    return session != null && Date.now() < session.expiresAt;
   }
 
   public requireAuthenticated(): boolean {

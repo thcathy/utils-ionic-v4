@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiHost: 'https://squote.funfunspell.com'
+  apiHost: 'https://oc-uat.funfunspell.com/squote'
 };
