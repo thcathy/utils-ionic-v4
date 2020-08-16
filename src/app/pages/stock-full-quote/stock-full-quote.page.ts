@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {StockService} from '../../service/stock.service';
 import {MarketDailyReport} from '../../entity/market-daily-report';
-import {LoadingController, NavParams, PopoverController, ToastController} from '@ionic/angular';
+import {LoadingController, ModalController, NavParams, PopoverController, ToastController} from '@ionic/angular';
 import {StockQuote} from '../../entity/stock-quote';
 import {StockHolding} from '../../entity/stock-holding';
 import {Fund} from '../../entity/fund';
+import {StockQuoteSettingsComponent} from '../../components/stock-quote-settings/stock-quote-settings.component';
 
 @Component({
     selector: 'app-stock-full-quote',
@@ -13,7 +14,7 @@ import {Fund} from '../../entity/fund';
 })
 export class StockFullQuotePage implements OnInit {
     marketDailyReports: Map<string, MarketDailyReport>;
-    indexQuotes: StockQuote[];
+    indexQuotes: StockQuote[] = [];
     stockQuotes: StockQuote[];
     holdings: StockHolding[];
     hsce: StockQuote;
@@ -23,16 +24,19 @@ export class StockFullQuotePage implements OnInit {
 
     codes: string;
     inProgress: boolean;
+    seletedIndexCode: string[];
 
-    constructor(private stockService: StockService,
-                private popoverCtrl: PopoverController,
-                private toastCtrl: ToastController) {
+    constructor(public stockService: StockService,
+                public popoverCtrl: PopoverController,
+                public toastCtrl: ToastController,
+                public modalController: ModalController) {
     }
 
     ngOnInit() {
         this.inProgress = true;
 
         this.codes = localStorage.getItem('codes');
+        this.seletedIndexCode = localStorage.getObject(StockQuoteSettingsComponent.SelectedIndexCodekey);
 
         this.stockService.getMarketDailyReport()
             .then(reports => {
@@ -124,6 +128,26 @@ export class StockFullQuotePage implements OnInit {
         } else {
             return [];
         }
+    }
+
+    filteredIndexQuotes() {
+        if (!this.indexQuotes) { return []; }
+        return this.indexQuotes.filter(index => !this.seletedIndexCode || this.seletedIndexCode.includes(index.stockCode));
+    }
+
+    async presentSettings() {
+        if (!this.indexQuotes) { return; }
+
+        const modal = await this.modalController.create({
+            component: StockQuoteSettingsComponent,
+            componentProps: {
+                'indexes': this.indexQuotes,
+            }
+        });
+        await modal.present();
+        const { data } = await modal.onWillDismiss();
+        console.log(data);
+        this.seletedIndexCode = data.selectedIndexCode;
     }
 }
 

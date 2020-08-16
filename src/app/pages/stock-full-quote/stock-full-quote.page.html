@@ -4,6 +4,9 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Full Quote</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon slot="icon-only" name="settings-outline" (click)="presentSettings()"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
   <ion-progress-bar type="indeterminate" *ngIf="inProgress"></ion-progress-bar>
 </ion-header>
@@ -44,7 +47,7 @@
           </ion-row>
         </div>
         <div class="card">
-          <ion-row *ngFor="let q of indexQuotes">
+          <ion-row *ngFor="let q of filteredIndexQuotes()">
             <ion-col size="4" size-md="2" size-lg="2">{{q.stockCode}}</ion-col>
             <ion-col size="4" size-md="3" size-lg="2" text-right>{{q.price}}</ion-col>
             <ion-col size="4" size-md="2" size-lg="2" text-right>{{q.change}}</ion-col>

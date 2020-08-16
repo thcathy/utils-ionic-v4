@@ -60,13 +60,13 @@ export class AuthService {
         console.error(`${JSON.stringify(err)}`);
         return;
       }
+      window.location.hash = '';
       this.onAuthSuccess(authResult);
     });
   }
 
   public onAuthSuccess(authResult) {
     if (authResult && authResult.accessToken && authResult.idToken) {
-      window.location.hash = '';
       this.setSession(authResult);
       this.router.navigate(['/home']);
     }
