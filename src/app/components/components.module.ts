@@ -1,24 +1,25 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {IonicModule} from '@ionic/angular';
 import {MenuItemComponent} from './menu-item/menu-item.component';
-import {StockQuote} from '../entity/stock-quote';
-import {StockQuoteSettingsComponent} from './stock-quote-settings/stock-quote-settings.component';
+import {CodePopoverMenu, StockQuoteSettingsComponent} from './stock-quote-settings/stock-quote-settings.component';
 
 @NgModule({
   declarations: [
     MenuItemComponent,
-    StockQuoteSettingsComponent,
+    StockQuoteSettingsComponent, CodePopoverMenu,
   ],
   imports: [
     CommonModule,
-    FormsModule,
+    FormsModule, ReactiveFormsModule,
     IonicModule.forRoot(),
   ],
   exports: [
     MenuItemComponent,
     StockQuoteSettingsComponent,
-  ]
+  ],
+  entryComponents: [ CodePopoverMenu ],
 })
-export class ComponentsModule {}
+export class ComponentsModule {
+}

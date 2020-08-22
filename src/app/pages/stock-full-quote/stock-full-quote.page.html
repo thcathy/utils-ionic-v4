@@ -5,28 +5,15 @@
     </ion-buttons>
     <ion-title>Full Quote</ion-title>
     <ion-buttons slot="end">
-      <ion-icon slot="icon-only" name="settings-outline" (click)="presentSettings()"></ion-icon>
+      <ion-button (click)="presentSettings()">
+        <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
   <ion-progress-bar type="indeterminate" *ngIf="inProgress"></ion-progress-bar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="10" size-md="11">
-        <ion-item  style="font-size: smaller; !important;">
-          <ion-label>codes</ion-label>
-          <ion-input [(ngModel)]="codes"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col size="2" size-md="1">
-        <ion-button fill="clear" (click)="presentPopover($event)">
-          <ion-icon name="ellipsis-vertical"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" >
     <ion-fab-button (click)="onSubmit()">
       <ion-icon name="reload"></ion-icon>
@@ -38,17 +25,17 @@
       <ion-col size="12" size-md="6" size-lg="6">
         <div class="card">
           <ion-row *ngFor="let q of stockQuotes">
-            <ion-col size="2" size-lg="1">{{q.stockCode}}</ion-col>
-            <ion-col size="2" size-lg="2" text-right>{{q.price | number: '1.2-2'}}</ion-col>
-            <ion-col size="0" size-lg="2" class="hidden-md-down" text-right>{{q.changeAmount}}</ion-col>
-            <ion-col size="3" size-lg="2" text-right>{{q.change}}</ion-col>
-            <ion-col size="5" size-lg="3" text-right>{{q.low}}-{{q.high}}</ion-col>
-            <ion-col size="0" size-lg="2" class="hidden-md-down" text-right>{{q.lastUpdate.split(' ')[1]}}</ion-col>
+            <ion-col size="2" size-lg="1"><div>{{q.stockCode}}</div></ion-col>
+            <ion-col size="2" size-lg="2" text-right><div>{{q.price | number: '1.2-2'}}</div></ion-col>
+            <ion-col size="0" size-lg="2" class="hidden-md-down" text-right><div>{{q.changeAmount}}</div></ion-col>
+            <ion-col size="3" size-lg="2" text-right><div>{{q.change}}</div></ion-col>
+            <ion-col size="5" size-lg="3" text-right><div>{{q.low}}-{{q.high}}</div></ion-col>
+            <ion-col size="0" size-lg="2" class="hidden-md-down" text-right><div>{{q.lastUpdate.split(' ')[1]}}</div></ion-col>
           </ion-row>
         </div>
         <div class="card">
           <ion-row *ngFor="let q of filteredIndexQuotes()">
-            <ion-col size="4" size-md="2" size-lg="2">{{q.stockCode}}</ion-col>
+            <ion-col size="4" size-md="2" size-lg="2">{{q.stockCode | slice : 0 : 6}}</ion-col>
             <ion-col size="4" size-md="3" size-lg="2" text-right>{{q.price}}</ion-col>
             <ion-col size="4" size-md="2" size-lg="2" text-right>{{q.change}}</ion-col>
             <ion-col size="3" size-md="5" size-lg="6" class="hidden-sm-down" text-right>{{q.low}} - {{q.high}}</ion-col>

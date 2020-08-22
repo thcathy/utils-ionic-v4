@@ -6,7 +6,8 @@ export class StockHolding {
     public gross: number,
     public date: Date,
     public hsce: number,
-    public side: string
+    public side: string,
+    public price: number,
   ) { }
 
   public toString() {

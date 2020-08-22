@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
 
-import {IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import {CodePopoverPage, StockFullQuotePage} from './stock-full-quote.page';
+import {StockFullQuotePage} from './stock-full-quote.page';
 
 @NgModule({
     imports: [
@@ -19,7 +19,6 @@ import {CodePopoverPage, StockFullQuotePage} from './stock-full-quote.page';
             }
         ])
     ],
-    declarations: [StockFullQuotePage, CodePopoverPage],
-    entryComponents: [ CodePopoverPage ],
+    declarations: [StockFullQuotePage],
 })
 export class StockFullQuotePageModule {}

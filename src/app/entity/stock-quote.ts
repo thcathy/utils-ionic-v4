@@ -11,4 +11,8 @@ export class StockQuote {
   yearLow: number;
   yearHigh: number;
   change: number;
+  changeAmount: string;
+  low: number;
+  high: number;
+  lastUpdate: string;
 }

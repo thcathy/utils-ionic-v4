@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {StockService} from '../../service/stock.service';
 import {MarketDailyReport} from '../../entity/market-daily-report';
-import {LoadingController, ModalController, NavParams, PopoverController, ToastController} from '@ionic/angular';
+import {ModalController, PopoverController, ToastController} from '@ionic/angular';
 import {StockQuote} from '../../entity/stock-quote';
 import {StockHolding} from '../../entity/stock-holding';
 import {Fund} from '../../entity/fund';
@@ -51,15 +51,6 @@ export class StockFullQuotePage implements OnInit {
             .then(r => this.updateEntryFromResult(r));
     }
 
-    async presentPopover(event: any) {
-        const popover = await this.popoverCtrl.create({
-            component: CodePopoverPage,
-            event: event,
-            componentProps: {parent: this},
-        });
-        return await popover.present();
-    }
-
     updateEntryFromResult(result) {
         this.indexQuotes = result['indexes'];
         this.hsce = this.indexQuotes.find(i => i.stockCode === 'HSCEI');
@@ -79,17 +70,6 @@ export class StockFullQuotePage implements OnInit {
 
         this.stockService.getFullQuote(this.codes)
             .then(r => this.updateEntryFromResult(r));
-    }
-
-    public onLoadQuery() {
-        this.stockService.loadQuery()
-            .then(q => this.codes = q);
-    }
-
-    public onSaveQuery() {
-        localStorage.setItem('codes', this.codes);
-        this.stockService.saveQuery(this.codes)
-            .then(q => this.presentToast(`saved query: ${q}`));
     }
 
     public relativePerformance(holding: StockHolding, spot: number, hsceSpot: number): number {
@@ -113,15 +93,6 @@ export class StockFullQuotePage implements OnInit {
         return sum;
     }
 
-    async presentToast(text: string) {
-        const toast = await this.toastCtrl.create({
-            message: text,
-            duration: 3000,
-            position: 'top'
-        });
-        toast.present();
-    }
-
     reportKeys(): Array<string> {
         if (this.marketDailyReports) {
             return Object.keys(this.marketDailyReports);
@@ -142,44 +113,15 @@ export class StockFullQuotePage implements OnInit {
             component: StockQuoteSettingsComponent,
             componentProps: {
                 'indexes': this.indexQuotes,
+                'inputCodes': this.codes.split(','),
             }
         });
         await modal.present();
         const { data } = await modal.onWillDismiss();
         console.log(data);
         this.seletedIndexCode = data.selectedIndexCode;
+        const needRefresh = data.stockCodes !== this.codes;
+        this.codes = data.stockCodes;
+        if (needRefresh) { this.onSubmit(); }
     }
-}
-
-@Component({
-  template: `
-      <ion-list style="padding: 0px; margin:0px;">
-          <ion-item (click)="save()">
-              <ion-label>Save</ion-label>
-          </ion-item>
-          <ion-item (click)="load()">
-              <ion-label>Load</ion-label>
-          </ion-item>
-      </ion-list>`
-})
-export class CodePopoverPage {
-    parent: StockFullQuotePage;
-    popover: any;
-
-    constructor(
-        private navParams: NavParams) {
-        this.parent = this.navParams.get('parent');
-        this.popover = this.navParams.get('popover');
-    }
-
-    save() {
-        this.popover.dismiss();
-        this.parent.onSaveQuery();
-    }
-
-    load() {
-        this.popover.dismiss();
-        this.parent.onLoadQuery();
-    }
-
 }
