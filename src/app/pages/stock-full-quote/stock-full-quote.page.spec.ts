@@ -2,11 +2,11 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StockFullQuotePage } from './stock-full-quote.page';
-import {AlertController, LoadingController, Platform, PopoverController, ToastController} from '@ionic/angular';
+import {AlertController, LoadingController, ModalController, Platform, PopoverController, ToastController} from '@ionic/angular';
 import {
   AlertControllerSpy,
   AuthServiceSpy,
-  LoadingControllerSpy,
+  LoadingControllerSpy, ModalControllerSpy,
   NGXLoggerSpy,
   PlatformMock,
   PopoverControllerSpy, ToastControllerSpy
@@ -35,7 +35,8 @@ describe('StockFullQuotePage', () => {
         { provide: AlertController, useValue: AlertControllerSpy() },
         { provide: AuthService, useValue: AuthServiceSpy()},
         { provide: PopoverController, useValue: PopoverControllerSpy()},
-        { provide: ToastController, useValue: ToastControllerSpy() }
+        { provide: ToastController, useValue: ToastControllerSpy() },
+        { provide: ModalController, useValue: ModalControllerSpy() }
       ]
     })
     .compileComponents();

@@ -15,6 +15,10 @@ export class PlatformMock {
     return (() => true);
   }
 
+  public platforms(): Function {
+    return (() => ['ci']);
+  }
+
   public hasFocus(_ele: HTMLElement): boolean {
     return true;
   }
@@ -105,7 +109,7 @@ export const GoogleAnalyticsSpy = () => jasmine.createSpyObj('GoogleAnalytics', 
 
 export const NavgationServiceSpy = () => jasmine.createSpyObj('NavigationService', ['goTo']);
 
-export const StorageSpy = () => jasmine.createSpyObj('Storage', ['get', 'set']);
+export const StorageSpy = () => jasmine.createSpyObj('Storage', ['get', 'set', 'getObject', 'setObject' ]);
 
 export const NGXLoggerSpy = () => jasmine.createSpyObj('NGXLogger', ['info', 'warn', 'error']);
 
@@ -124,3 +128,6 @@ export const AuthServiceSpy = () => jasmine.createSpyObj('AuthService', ['requir
 export const PopoverControllerSpy = () => jasmine.createSpyObj('PopoverController', ['create']);
 
 export const ToastControllerSpy = () => jasmine.createSpyObj('ToastController', ['create']);
+
+export const ModalControllerSpy = () => jasmine.createSpyObj('ModalController', ['create']);
+

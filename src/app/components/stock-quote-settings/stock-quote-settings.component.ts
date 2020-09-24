@@ -16,7 +16,7 @@ export class StockQuoteSettingsComponent implements OnInit {
   stockCodesForm: FormGroup;
 
   @Input() indexes: StockQuote[];
-  @Input() inputCodes: string[];
+  @Input() inputCodes: string[] = [];
   selectedIndexCode: string[];
 
   constructor(
