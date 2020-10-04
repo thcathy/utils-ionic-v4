@@ -4,6 +4,7 @@ import {Platform} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AuthService} from './service/auth.service';
+import './prototypes/storage-prototypes';
 
 import Auth0Cordova from '@auth0/cordova';
 import {Router} from '@angular/router';
@@ -40,15 +41,6 @@ export class AppComponent {
             console.log('App opened with URL: ' +  data.url);
             Auth0Cordova.onRedirectUri(data.url);
         });
-
-        Storage.prototype.setObject = function(key, value) {
-            this.setItem(key, JSON.stringify(value));
-        };
-
-        Storage.prototype.getObject = function(key) {
-            const value = this.getItem(key);
-            return value && JSON.parse(value);
-        };
     }
 
     login() {
