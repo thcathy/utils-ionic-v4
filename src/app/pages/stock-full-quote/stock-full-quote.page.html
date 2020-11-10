@@ -59,7 +59,7 @@
         <div class="card" *ngFor="let fund of funds">
           <ion-row>
             <ion-col>{{fund.name}}</ion-col>
-            <ion-col>{{fund.profit | number: '1.0'}}</ion-col>
+            <ion-col>{{fund.profit | number: '1.0'}} <span class="hidden-md-down"> -> {{fund.cashoutAmount | number: '1.0'}}</span></ion-col>
             <ion-col>{{fund.netProfit + fund.profit | number: '1.0'}}</ion-col>
           </ion-row>
           <ion-row>

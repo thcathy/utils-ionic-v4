@@ -1,4 +1,4 @@
-import {HoldingStock} from "./holding-stock";
+import {HoldingStock} from './holding-stock';
 
 export class Fund {
   constructor(
@@ -6,6 +6,7 @@ export class Fund {
     public date: Date,
     public profit: number,
     public netProfit: number,
+    public cashoutAmount: number,
     public holdings: Map<string, HoldingStock>
   ) { }
 
