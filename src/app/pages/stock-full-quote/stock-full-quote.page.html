@@ -26,7 +26,7 @@
         <div class="card">
           <ion-row *ngFor="let q of stockQuotes">
             <ion-col size="2" size-lg="1"><div>{{q.stockCode}}</div></ion-col>
-            <ion-col size="2" size-lg="2" text-right><div>{{q.price | number: '1.2-2'}}</div></ion-col>
+            <ion-col size="2" size-lg="2" text-right><div>{{q.price | number: '1.2-3'}}</div></ion-col>
             <ion-col size="0" size-lg="2" class="hidden-md-down" text-right><div>{{q.changeAmount}}</div></ion-col>
             <ion-col size="3" size-lg="2" text-right><div>{{q.change}}</div></ion-col>
             <ion-col size="5" size-lg="3" text-right><div>{{q.low}}-{{q.high}}</div></ion-col>
@@ -47,7 +47,7 @@
             <ion-col size="2" size-sm="2" size-lg="2" size-xl="2" text-right>{{relativePerformance(holding, allQuotes[holding.code].price, hsce.price) | number: '1.2-2'}}</ion-col>
             <ion-col size="3" size-sm="2" size-lg="2" size-xl="2" text-right><span *ngIf="holding.side == 'BUY'">{{changePercentage(holding.price, allQuotes[holding.code].price) | number: '1.2-2'}}%</span></ion-col>
             <ion-col size="2" size-sm="1" size-lg="1" size-xl="1">{{holding.side}}</ion-col>
-            <ion-col size="3" size-sm="2" size-lg="2" size-xl="1" text-right>{{holding.price | number: '1.2-2'}}</ion-col>
+            <ion-col size="3" size-sm="2" size-lg="2" size-xl="1" text-right>{{holding.price | number: '1.2-3'}}</ion-col>
             <ion-col size="0" size-sm="3" size-lg="2" size-xl="2" class="hidden-xs-down" text-right>${{holding.gross | number: '1.0'}}</ion-col>
             <ion-col size="0" size-sm="0" size-lg="0" size-xl="1" class="hidden-lg-down" text-right>{{holding.quantity}}</ion-col>
             <ion-col size="0" size-sm="0" size-lg="2" size-xl="2" class="hidden-md-down" text-right>{{holding.date | date: 'yyyy-MM-dd'}}</ion-col>
