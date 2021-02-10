@@ -6,7 +6,7 @@ export const environment = {
     production: false,
     // apiHost: 'https://oc-uat.funfunspell.com/squote'
     // apiHost: 'http://ubuntu.local:8090'
-    apiHost: 'http://hp-g42.local:8090'
+    apiHost: 'https://hp-g42.funfunspell.com/squote'
 };
 
 /*
