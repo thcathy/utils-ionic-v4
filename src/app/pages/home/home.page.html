@@ -20,4 +20,6 @@
     </ion-list>
   </div>
 
+  <div style="margin: auto; padding-top: 16px; text-align: center"
+       *ngIf="this.authService.isAuthenticated()">Login as: {{this.authService?.session?.email}}</div>
 </ion-content>

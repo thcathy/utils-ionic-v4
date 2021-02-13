@@ -21,12 +21,14 @@ export class Session {
   idToken: string;
   accessToken: string;
   expiresAt: number;
+  email: string;
 }
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   static sessionKey = 'thc_session';
-  auth0Cordova = new Auth0.WebAuth(auth0CordovaConfig);
+
+  session: Session;
 
   auth0 = new Auth0.WebAuth({
     clientID: 'mBv3zeOBD6Wl2NI2zMzeJFO8kZU7XyJl',
@@ -34,7 +36,7 @@ export class AuthService {
     responseType: 'token id_token',
     audience: 'https://thcathy.auth0.com/userinfo',
     redirectUri: window.location.origin,
-    scope: 'openid profile'
+    scope: 'openid profile email'
   });
 
   constructor(private zone: NgZone,
@@ -90,7 +92,10 @@ export class AuthService {
     session.idToken = authResult.idToken;
     const decodeIdToken = jwt_decode(authResult.idToken);
     session.expiresAt = decodeIdToken['exp'] * 1000;
-    console.log(`session: ${JSON.stringify(session)}`);
+    session.email = decodeIdToken.email;
+    console.log(`id token: ${JSON.stringify(decodeIdToken)}`);
+    console.log(`id token (raw): ${authResult.idToken}`);
+    this.session = session;
     localStorage.setObject(AuthService.sessionKey, session);
   }
 
@@ -112,5 +117,9 @@ export class AuthService {
       return false;
     }
     return true;
+  }
+
+  public loadSession(): void {
+    this.session = localStorage.getObject(AuthService.sessionKey) as Session;
   }
 }
