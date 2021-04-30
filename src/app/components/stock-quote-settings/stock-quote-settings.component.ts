@@ -95,7 +95,7 @@ export class StockQuoteSettingsComponent implements OnInit {
   }
 
   public saveStockCodeToServer() {
-    this.stockService.saveQuery(JSON.stringify(this.codes.value))
+    this.stockService.saveQuery(escape(JSON.stringify(this.codes.value)))
       .then(q => this.presentToast(`saved query: ${q}`));
   }
 
