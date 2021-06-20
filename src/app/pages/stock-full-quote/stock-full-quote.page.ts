@@ -119,7 +119,7 @@ export class StockFullQuotePage implements OnInit {
             component: StockQuoteSettingsComponent,
             componentProps: {
                 'indexes': this.indexQuotes,
-                'inputCodes': this.codes.split(','),
+                'inputCodes': this?.codes?.split(','),
             }
         });
         await modal.present();

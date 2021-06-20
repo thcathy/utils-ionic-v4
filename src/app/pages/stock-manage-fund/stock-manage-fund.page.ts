@@ -27,7 +27,10 @@ export class StockManageFundPage implements OnInit {
     }
     this.requestUrl = '';
     this.fundService.getFunds().subscribe(
-      funds => this.funds = funds,
+      funds => {
+        this.funds?.every(f => console.log(`${JSON.stringify(f)}`));
+        this.funds = funds;
+      },
       err => this.appService.handleError(err)
 
     );
@@ -45,7 +48,10 @@ export class StockManageFundPage implements OnInit {
         this.requestHistory.unshift(this.requestUrl);
         this.requestUrl = '';
         this.fundService.getFunds().subscribe(
-          funds => this.funds = funds,
+          funds => {
+            this.funds?.every(f => console.log(`${JSON.stringify(f)}`));
+            this.funds = funds;
+          },
           err => this.appService.handleError(err)
         );
       });

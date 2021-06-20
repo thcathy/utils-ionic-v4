@@ -22,7 +22,7 @@ export class FundService {
             .toPromise()
             .then(response => {
               try {
-                return JSON.stringify(response);
+                return response;
               } catch (e) {
                 return response.toString();
               }

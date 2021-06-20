@@ -7,7 +7,8 @@ export class Fund {
     public profit: number,
     public netProfit: number,
     public cashoutAmount: number,
-    public holdings: Map<string, HoldingStock>
+    public holdings: Map<string, HoldingStock>,
+    public type: string,
   ) { }
 
   public toString() {
