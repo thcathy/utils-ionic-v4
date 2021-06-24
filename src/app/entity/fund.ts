@@ -9,6 +9,7 @@ export class Fund {
     public cashoutAmount: number,
     public holdings: Map<string, HoldingStock>,
     public type: string,
+    public cashinAmount?: number,
   ) { }
 
   public toString() {
