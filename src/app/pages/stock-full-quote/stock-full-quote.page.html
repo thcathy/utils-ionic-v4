@@ -50,7 +50,7 @@
             <ion-col size="3" size-sm="2" size-lg="2" size-xl="1" text-right>{{holding.price | number: '1.2-3'}}</ion-col>
             <ion-col size="0" size-sm="3" size-lg="2" size-xl="2" class="hidden-xs-down" text-right>${{holding.gross | number: '1.0'}}</ion-col>
             <ion-col size="0" size-sm="0" size-lg="0" size-xl="1" class="hidden-lg-down" text-right>{{holding.quantity}}</ion-col>
-            <ion-col size="0" size-sm="0" size-lg="2" size-xl="2" class="hidden-md-down" text-right>{{holding.date | date: 'yyyy-MM-dd'}}</ion-col>
+            <ion-col size="0" size-sm="0" size-lg="2" size-xl="2" class="hidden-md-down" text-right>{{holding.date | date: 'yyyy-MM-dd'}} ({{holding.fundName}})</ion-col>
           </ion-row>
         </div>
       </ion-col>

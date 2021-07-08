@@ -8,6 +8,7 @@ export class StockHolding {
     public hsce: number,
     public side: string,
     public price: number,
+    public fundName: string,
   ) { }
 
   public toString() {

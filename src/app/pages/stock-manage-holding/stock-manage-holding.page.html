@@ -15,7 +15,7 @@
         <ion-list>
           <ion-item *ngFor="let holding of holdings" style="padding-left: 0px;">
             <ion-label>
-              <h3>{{holding.code}} - {{holding.side}} - {{holding.quantity | number:'1.0'}}<span class="ion-float-right">${{holding.gross | number:'1.2-2'}}</span></h3>
+              <h3>{{holding.code}} - {{holding.side}} - {{holding.quantity | number:'1.0'}} ({{holding.fundName}})<span class="ion-float-right">${{holding.gross | number:'1.2-2'}}</span></h3>
               <p>HSCEI: {{holding.hsce | number:'4.2-2'}} <span class="ion-float-right">{{holding.date | date: 'yyyy-MM-dd' }}</span></p>
             </ion-label>
             <ion-button fill="clear" slot="end" (click)="confirmDelete(holding)"><ion-icon name="trash"></ion-icon></ion-button>
