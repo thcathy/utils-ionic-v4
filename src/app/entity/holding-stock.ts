@@ -5,6 +5,8 @@ export class HoldingStock {
     public gross: number,
     public date: Date,
     public hsce: number,
-    public side: string
+    public side: string,
+    public code: string,
+    public fees: Map<string, number>,
   ) { }
 }

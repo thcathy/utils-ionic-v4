@@ -30,8 +30,8 @@ export class SquoteService {
             );
     }
 
-    updateFundByHolding(fundName: string, holdingId: string) {
-        const queryString = 'fundName=' + fundName + '&holdingId=' + encodeURIComponent(holdingId);
+    updateFundByHolding(fundName: string, holdingId: string, fee: number = 0) {
+        const queryString = 'fundName=' + fundName + '&holdingId=' + encodeURIComponent(holdingId) + '&fee=' + fee;
         console.log(queryString);
         return this.http.get(this.updateFundByHoldingUrl + queryString)
             .pipe(

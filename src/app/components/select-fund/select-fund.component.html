@@ -1,10 +1,39 @@
 <div *ngIf="holding">
   <p>Created: {{holding | json}}</p>
+  <p>Select Fund:</p>
   <ul *ngFor="let f of funds">
-    <li>Add to: <a (click)="onSelectFund(f)">{{f.name}}:
-      <span     *ngIf="f.holdings[holding.code]">{{f.holdings[holding.code] | json}}</span></a>
+    <li><a (click)="onSelectFund(f)">{{f.name}}:
+      <span *ngIf="f.holdings[holding.code]">{{f.holdings[holding.code] | json}}</span></a>
     </li>
   </ul>
-  <div *ngIf="updatedFund">Updated Fund ({{updatedFund.name}}): {{updatedFund.holdings[holding.code] | json}}</div>
+  <p>Select Fee:</p>
+  <ul>
+    <li>include stamp: <a (click)="onSelectFee(holding.fees['INCLUDE_STAMP'])">{{holding.fees['INCLUDE_STAMP']}}</a></li>
+    <li>exclude stamp: <a (click)="onSelectFee(holding.fees['EXCLUDE_STAMP'])">{{holding.fees['EXCLUDE_STAMP']}}</a></li>
+  </ul>
+
+  <ion-list>
+    <ion-list-header>Add to fund</ion-list-header>
+    <ion-item>
+      <ion-label>Holding</ion-label>
+      <ion-note slot="end" color="primary">{{holding.code}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Fund</ion-label>
+      <ion-note slot="end" color="primary">{{selectedFund?.name}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Fee</ion-label>
+      <ion-note slot="end" color="primary">{{selectedFee}}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-button slot="end" fill="outline" (click)="updateFundByHolding()">Submit</ion-button>
+    </ion-item>
+  </ion-list>
+
+
+  <div *ngIf="updatedFund">Updated Fund [{{updatedFund.name}}], Profit={{updatedFund.profit}}:
+    <br/>{{updatedFund.holdings[holding.code] | json}}
+  </div>
 </div>
 <div>{{errorMessage}}</div>

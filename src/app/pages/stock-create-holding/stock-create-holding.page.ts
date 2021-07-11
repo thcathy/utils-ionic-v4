@@ -39,5 +39,6 @@ export class StockCreateHoldingPage implements OnInit {
       this.message = '';
       this.hscei = '';
       this.errorMessage = '';
+      this.createdHolding = null;
   }
 }

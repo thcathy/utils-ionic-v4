@@ -14,6 +14,8 @@ export class SelectFundComponent implements OnChanges {
     @Input() holding: HoldingStock;
     errorMessage: string;
     funds: Fund[];
+    selectedFund: Fund;
+    selectedFee = 0;
     updatedFund: Fund;
 
     constructor(
@@ -29,16 +31,26 @@ export class SelectFundComponent implements OnChanges {
                 funds => this.funds = funds,
                 error => this.errorMessage = <any>error
             );
+        this.selectedFund = null;
+        this.selectedFee = 0;
+        this.updatedFund = null;
     }
 
     onSelectFund(fund: Fund) {
-        console.log('Add holding to :' + fund.name);
-        this.squoteService.updateFundByHolding(fund.name, this.holding.id)
-            .subscribe(f => {
-                    this.updatedFund = f;
-                    this.funds = [];
-                },
-                error => this.errorMessage = <any>error);
+        this.selectedFund = fund;
     }
 
+    onSelectFee(fee: number) {
+        this.selectedFee = fee;
+    }
+
+    updateFundByHolding() {
+        console.log('Add holding to :' + this.selectedFund.name);
+        this.squoteService.updateFundByHolding(this.selectedFund.name, this.holding.id, this.selectedFee)
+          .subscribe(f => {
+                this.updatedFund = f;
+                this.funds = [];
+            },
+            error => this.errorMessage = <any>error);
+    }
 }
