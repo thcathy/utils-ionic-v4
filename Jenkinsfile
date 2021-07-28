@@ -20,4 +20,7 @@ pipeline {
     }
 
   }
+  environment {
+    PATH = './node_modules/.bin:$PATH'
+  }
 }
