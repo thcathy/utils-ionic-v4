@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
       args '-v $HOME/.npm:/root/utils-ionic-v4-npm'
-      image 'selenium/node-chrome:latest'
+      image 'zenika/alpine-chrome:with-chromedriver'
     }
 
   }
