@@ -15,7 +15,7 @@ pipeline {
 
     stage('Build ios') {
       steps {
-        sh 'npx ionic capacitor build ios --prod'
+        sh 'npx ionic capacitor build ios -- --prod'
       }
     }
 
