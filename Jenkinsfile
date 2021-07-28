@@ -1,8 +1,8 @@
 pipeline {
   agent {
     docker {
-      image 'node:lts-buster-slim'
       args '-v $HOME/.npm:/root/utils-ionic-v4-npm'
+      image 'selenium/node-chrome:latest'
     }
 
   }
@@ -13,26 +13,29 @@ pipeline {
       }
     }
 
-    stage('build') {
-      parallel {
-        stage('Build ios') {
-          steps {
-            sh 'npx ionic build --prod'
-          }
-        }
-
-        stage('list .npm') {
-          steps {
-            sh 'ls -rtla ~/.npm'
-          }
-        }
-
+    stage('Build ios') {
+      steps {
+        sh 'npx ionic build --prod'
       }
     }
 
     stage('test') {
       steps {
         sh 'npm run test-ci'
+        echo 'collect test report'
+      }
+    }
+
+    stage('deploy to firebase') {
+      steps {
+        waitUntil()
+        echo 'deploy to firebase'
+      }
+    }
+
+    stage('build iOS') {
+      steps {
+        echo 'print iOS'
       }
     }
 
