@@ -8,19 +8,27 @@ pipeline {
   }
   stages {
     stage('NPM install') {
-      steps {
-        sh 'npm install'
+      parallel {
+        stage('NPM install') {
+          steps {
+            sh 'npm install'
+          }
+        }
+
+        stage('test') {
+          steps {
+            sh 'echo $(pwd)'
+          }
+        }
+
       }
     }
 
     stage('Build ios') {
       steps {
-        sh 'ionic capacitor build ios --release'
+        sh 'npx ionic capacitor build ios --release'
       }
     }
 
-  }
-  environment {
-    PATH = './node_modules/.bin:$PATH'
   }
 }
