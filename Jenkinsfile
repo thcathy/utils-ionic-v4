@@ -2,20 +2,37 @@ pipeline {
   agent {
     docker {
       image 'node:lts-buster-slim'
-      args '-p 3000:3000'
+      args '-v $HOME/.npm:/root/utils-ionic-v4-npm'
     }
 
   }
   stages {
-    stage('NPM install') {
+    stage('npm ci') {
       steps {
-        sh 'npm install'
+        sh 'npm ci'
       }
     }
 
-    stage('Build ios') {
+    stage('build') {
+      parallel {
+        stage('Build ios') {
+          steps {
+            sh 'npx ionic build --prod'
+          }
+        }
+
+        stage('list .npm') {
+          steps {
+            sh 'ls -rtla ~/.npm'
+          }
+        }
+
+      }
+    }
+
+    stage('test') {
       steps {
-        sh 'npx ionic capacitor build ios -- --prod'
+        sh 'npm run test-ci'
       }
     }
 
