@@ -22,13 +22,12 @@ pipeline {
     stage('test') {
       steps {
         sh 'npm run test-ci'
-        echo 'collect test report'
+        junit 'src/TESTS*.xml'
       }
     }
 
     stage('deploy to firebase') {
       steps {
-        waitUntil()
         echo 'deploy to firebase'
       }
     }
