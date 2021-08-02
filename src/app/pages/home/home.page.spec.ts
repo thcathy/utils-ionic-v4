@@ -4,6 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomePage } from './home.page';
 import {IonicModule} from '@ionic/angular';
 import {RouterTestingModule} from '@angular/router/testing';
+import {NGXLogger} from 'ngx-logger';
 
 describe('HomePage', () => {
   let component: HomePage;
@@ -16,6 +17,9 @@ describe('HomePage', () => {
       imports: [
         IonicModule.forRoot(),
         RouterTestingModule.withRoutes([])
+      ],
+      providers: [
+        { provide: NGXLogger, useValue: jasmine.createSpyObj('NGXLogger', ['info', 'warn', 'error', 'debug']) },
       ]
     })
       .compileComponents();

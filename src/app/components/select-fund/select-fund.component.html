@@ -1,4 +1,4 @@
-<div *ngIf="holding">
+<div *ngIf="holding" style="padding-bottom: 12px;">
   <p>Created: {{holding | json}}</p>
   <p>Select Fund:</p>
   <ul *ngFor="let f of funds">
@@ -31,9 +31,9 @@
     </ion-item>
   </ion-list>
 
-
   <div *ngIf="updatedFund">Updated Fund [{{updatedFund.name}}], Profit={{updatedFund.profit}}:
     <br/>{{updatedFund.holdings[holding.code] | json}}
   </div>
 </div>
 <div>{{errorMessage}}</div>
+<hr/>
