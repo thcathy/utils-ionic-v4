@@ -17,7 +17,7 @@ pipeline {
       }
     }
 
-    stage('Build ios') {
+    stage('build') {
       steps {
         sh 'npx ionic build --prod'
       }
@@ -29,16 +29,17 @@ pipeline {
         junit 'src/TESTS*.xml'
       }
     }
-
+    
+    stage('build and archive iOS project') {
+      steps {
+        sh 'npx cap copy ios'
+        archiveArtifacts artifacts: './ios', followSymlinks: false, onlyIfSuccessful: true
+      }
+    }
+    
     stage('deploy to firebase') {
       steps {
         echo 'deploy to firebase'
-      }
-    }
-
-    stage('build iOS') {
-      steps {
-        echo 'print iOS'
       }
     }
 
