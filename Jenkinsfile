@@ -2,12 +2,8 @@ pipeline {
   agent {
     docker {
       args '-v $HOME/.npm:/root/utils-ionic-v4-npm'
-      image 'cimg/node:16.5.0-browsers'
+      image 'zenika/alpine-chrome:with-node'
     }
-  }
-
-  environment {
-      CHROME_BIN = '/usr/bin/google-chrome'
   }
 
   stages {
@@ -33,7 +29,7 @@ pipeline {
     stage('build and archive iOS project') {
       steps {
         sh 'npx cap copy ios'
-        archiveArtifacts artifacts: './ios', followSymlinks: false, onlyIfSuccessful: true
+        zip zipFile: "ios-${(new Date()).format('yyyy-MM-dd')}.zip", dir: 'ios/App', archive: true
       }
     }
     
