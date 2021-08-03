@@ -34,13 +34,10 @@ pipeline {
     }
     
     stage('deploy to firebase') {
-      when { branch 'master' }
-      environment {
-        FIREBASE_DEPLOY_KEY = credentials('FIREBASE_DEPLOY_KEY')
-      }
       steps {
-        sh 'npx firebase deploy --non-interactive --token ${FIREBASE_DEPLOY_KEY}'
+        echo 'deploy to firebase'
       }
     }
+
   }
 }
