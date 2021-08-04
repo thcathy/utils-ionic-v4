@@ -34,8 +34,12 @@ pipeline {
     }
     
     stage('deploy to firebase') {
+      environment {
+        FIREBASE_DEPLOY_KEY = credentials('FIREBASE_DEPLOY_KEY')
+      }
       steps {
-        echo 'deploy to firebase'
+        sh 'npm install firebase-tools'
+        sh 'npx firebase deploy --token ${FIREBASE_DEPLOY_KEY}'
       }
     }
 
