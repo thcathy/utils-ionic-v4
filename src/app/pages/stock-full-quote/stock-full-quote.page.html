@@ -34,23 +34,21 @@
           </ion-row>
         </div>
         <div class="card">
-          <ion-row *ngFor="let q of filteredIndexQuotes()">
-            <ion-col size="4" size-md="2" size-lg="2">{{q.stockCode | slice : 0 : 6}}</ion-col>
-            <ion-col size="4" size-md="3" size-lg="2" text-right>{{q.price}}</ion-col>
-            <ion-col size="4" size-md="2" size-lg="2" text-right>{{q.change}}</ion-col>
-            <ion-col size="3" size-md="5" size-lg="6" class="hidden-sm-down" text-right>{{q.low}} - {{q.high}}</ion-col>
-          </ion-row>
+            <ion-row *ngFor="let q of filteredIndexQuotes()">
+              <ion-col size="3">{{q.stockCode | slice : 0 : 6}}</ion-col>
+              <ion-col size="4">{{q.price}} ({{q.change}})</ion-col>
+              <ion-col class="ion-text-right" size="5">{{q.low}}-{{q.high}}</ion-col>
+            </ion-row>
         </div>
         <div class="card">
           <ion-row *ngFor="let holding of holdings">
-            <ion-col size="2" size-sm="2" size-lg="1" size-xl="1">{{holding.code}}</ion-col>
-            <ion-col size="2" size-sm="2" size-lg="2" size-xl="2" text-right>{{relativePerformance(holding, allQuotes[holding.code].price, hsce.price) | number: '1.2-2'}}</ion-col>
-            <ion-col size="3" size-sm="2" size-lg="2" size-xl="2" text-right><span *ngIf="holding.side == 'BUY'">{{changePercentage(holding.price, allQuotes[holding.code].price) | number: '1.2-2'}}%</span></ion-col>
-            <ion-col size="2" size-sm="1" size-lg="1" size-xl="1">{{holding.side}}</ion-col>
-            <ion-col size="3" size-sm="2" size-lg="2" size-xl="1" text-right>{{holding.price | number: '1.2-3'}}</ion-col>
-            <ion-col size="0" size-sm="3" size-lg="2" size-xl="2" class="hidden-xs-down" text-right>${{holding.gross | number: '1.0'}}</ion-col>
-            <ion-col size="0" size-sm="0" size-lg="0" size-xl="1" class="hidden-lg-down" text-right>{{holding.quantity}}</ion-col>
-            <ion-col size="0" size-sm="0" size-lg="2" size-xl="2" class="hidden-md-down" text-right>{{holding.date | date: 'yyyy-MM-dd'}} ({{holding.fundName}})</ion-col>
+            <ion-col size="2" size-lg="1">{{holding.code}}</ion-col>
+            <ion-col size="6" size-lg="3"><span *ngIf="holding.side == 'BUY'">{{changePercentage(holding.price, allQuotes[holding.code].price) | number: '1.2-2'}}%</span> ({{relativePerformance(holding, allQuotes[holding.code].price, hsce.price) | number: '1.2-2'}})</ion-col>
+            <ion-col size="4" size-lg="1" class="ion-text-right">{{holding.price | number: '1.2-3'}}</ion-col>
+            <ion-col size="3" size-lg="2" class="ion-text-right">${{holding.gross | number: '1.0'}}</ion-col>
+            <ion-col size="3" size-lg="1" class="ion-text-right">{{holding.side=='BUY' ? '+' : '-'}}{{holding.quantity}}</ion-col>
+            <ion-col size="3" size-lg="2" class="ion-text-right">{{holding.date | date: 'yyyy-MM-dd'}}</ion-col>
+            <ion-col size="3" size-lg="2" class="ion-text-right">{{holding.fundName}}</ion-col>
           </ion-row>
         </div>
       </ion-col>
