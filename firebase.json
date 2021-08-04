@@ -1,46 +1,45 @@
-pipeline {
-  agent {
-    docker {
-      args '-v $HOME/.npm:/root/utils-ionic-v4-npm'
-      image 'zenika/alpine-chrome:with-node'
-    }
-  }
-
-  stages {
-    stage('npm ci') {
-      steps {
-        sh 'npm ci'
+{
+  "hosting": {
+    "public": "www",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
       }
-    }
-
-    stage('build') {
-      steps {
-        sh 'npx ionic build --prod'
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(js)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31536000"
+          }
+        ]
+      },
+      {
+        "source": "404.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=300"
+          }
+        ]
       }
-    }
-
-    stage('test') {
-      steps {
-        sh 'npm run test-ci'
-        junit 'src/TESTS*.xml'
-      }
-    }
-    
-    stage('build and archive iOS project') {
-      steps {
-        sh 'npx cap copy ios'
-        zip zipFile: "ios-${(new Date()).format('yyyy-MM-dd')}.zip", dir: 'ios/App', archive: true
-      }
-    }
-    
-    stage('deploy to firebase') {
-      when { branch 'master' }
-      environment {
-        FIREBASE_DEPLOY_KEY = credentials('FIREBASE_DEPLOY_KEY')
-      }
-      steps {
-        sh 'npx firebase deploy --non-interactive --token ${FIREBASE_DEPLOY_KEY}'
-      }
-    }
+    ]
   }
 }
