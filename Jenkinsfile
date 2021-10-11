@@ -25,15 +25,9 @@ pipeline {
         junit 'src/TESTS*.xml'
       }
     }
-    
-    stage('build and archive iOS project') {
-      steps {
-        sh 'npx cap copy ios'
-        zip zipFile: "ios-${(new Date()).format('yyyy-MM-dd')}.zip", dir: 'ios/App', archive: true
-      }
-    }
-    
+
     stage('deploy to firebase') {
+      when { branch 'master' }
       environment {
         FIREBASE_DEPLOY_KEY = credentials('FIREBASE_DEPLOY_KEY')
       }
@@ -42,6 +36,5 @@ pipeline {
         sh 'npx firebase deploy --token ${FIREBASE_DEPLOY_KEY}'
       }
     }
-
   }
 }
