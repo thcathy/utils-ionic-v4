@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {StockQuote} from '../../entity/stock-quote';
-import {ModalController, NavParams, PopoverController, ToastController} from '@ionic/angular';
+import {IonToggle, ModalController, NavParams, PopoverController, ToastController} from '@ionic/angular';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {KeyValue} from '@angular/common';
 import {StockService} from '../../service/stock.service';
@@ -17,7 +17,10 @@ export class StockQuoteSettingsComponent implements OnInit {
 
   @Input() indexes: StockQuote[];
   @Input() inputCodes: string[] = [];
+  @Input() showMore: boolean;
+
   selectedIndexCode: string[];
+  @ViewChild('showMoreToggle', {static: true}) showMoreToggle: IonToggle;
 
   constructor(
     private stockService: StockService,
@@ -38,6 +41,8 @@ export class StockQuoteSettingsComponent implements OnInit {
     this.inputCodes.forEach(v => this.addControl(v));
   }
 
+
+
   toggleChanged(index: StockQuote) {
     const pos = this.selectedIndexCode.indexOf(index.stockCode, 0);
     if (pos > -1) {
@@ -57,11 +62,13 @@ export class StockQuoteSettingsComponent implements OnInit {
   dismiss() {
     console.log(`store selectedIndexCode: ${this.selectedIndexCode}`);
     console.log(`this.codeControls.value: ${JSON.stringify(this.codes.value)}`);
+    console.log(`showMore value: ${this.showMoreToggle.checked}`);
     localStorage.setObject(StockQuoteSettingsComponent.SelectedIndexCodekey, this.selectedIndexCode);
     this.modalController.dismiss({
       'dismissed': true,
       'selectedIndexCode': this.selectedIndexCode,
       'stockCodes': this.codes.value.filter(v => v !== '').join(','),
+      'showMore': this.showMoreToggle.checked,
     });
   }
 

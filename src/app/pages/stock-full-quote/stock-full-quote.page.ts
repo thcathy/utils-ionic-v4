@@ -22,6 +22,7 @@ export class StockFullQuotePage implements OnInit {
     allQuotes: Map<string, StockQuote>;
     funds: Fund[];
     tbase: MarketDailyReport;
+    showMore = false;
 
     codes: string;
     inProgress: boolean;
@@ -120,6 +121,7 @@ export class StockFullQuotePage implements OnInit {
             componentProps: {
                 'indexes': this.indexQuotes,
                 'inputCodes': this?.codes?.split(','),
+                'showMore': this.showMore,
             }
         });
         await modal.present();
@@ -128,6 +130,7 @@ export class StockFullQuotePage implements OnInit {
         this.seletedIndexCode = data.selectedIndexCode;
         const needRefresh = data.stockCodes !== this.codes;
         this.codes = data.stockCodes;
+        this.showMore = data.showMore;
         if (needRefresh) { this.onSubmit(); }
     }
 }
