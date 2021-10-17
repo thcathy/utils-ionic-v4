@@ -13,7 +13,7 @@
       <ion-col size-md="1" size-lg="2" size-xl="3"></ion-col>
       <ion-col size="12" size-md="10" size-lg="8" size-xl="6">
         <ion-list>
-          <ion-item *ngFor="let holding of holdings" style="padding-left: 0px;">
+          <ion-item *ngFor="let holding of holdings; trackBy: holdingTrackById" style="padding-left: 0;">
             <ion-label>
               <h3>{{holding.code}} - {{holding.side}} - {{holding.quantity | number:'1.0'}} ({{holding.fundName}})<span class="ion-float-right">${{holding.gross | number:'1.2-2'}}</span></h3>
               <p>HSCEI: {{holding.hsce | number:'4.2-2'}} <span class="ion-float-right">{{holding.date | date: 'yyyy-MM-dd' }}</span></p>

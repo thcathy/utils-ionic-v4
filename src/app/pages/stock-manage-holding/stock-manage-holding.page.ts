@@ -33,6 +33,10 @@ export class StockManageHoldingPage implements OnInit {
       .then(holdings => this.holdings = holdings);
   }
 
+  holdingTrackById(index, holding: StockHolding) {
+    return holding.id;
+  }
+
   async confirmDelete(holding: StockHolding) {
     const alert = await this.alertController.create({
       header: 'Confirm remove',
