@@ -24,7 +24,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Fee</ion-label>
-      <ion-note slot="end" color="primary">{{selectedFee}}</ion-note>
+      <ion-input slot="end" type="number" [(ngModel)]="selectedFee"></ion-input>
     </ion-item>
     <ion-item>
       <ion-button slot="end" fill="outline" (click)="updateFundByHolding()">Submit</ion-button>
