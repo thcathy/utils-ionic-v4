@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import {StockHolding} from '../../entity/stock-holding';
 import {AlertController} from '@ionic/angular';
 import {StockService} from '../../service/stock.service';
@@ -14,7 +14,8 @@ export class StockManageHoldingPage implements OnInit {
 
   constructor(public alertController: AlertController,
               public stockService: StockService,
-              public authService: AuthService) { }
+              public authService: AuthService,
+              private ngZone: NgZone) { }
 
   ngOnInit() {}
 
@@ -30,7 +31,7 @@ export class StockManageHoldingPage implements OnInit {
   onDelete(holding: StockHolding) {
     console.log(`delete holding: ${holding}`);
     this.stockService.deleteStockHolding(holding.id)
-      .then(holdings => this.holdings = holdings);
+      .then(holdings => this.ngZone.run(() => { this.holdings = holdings; }) );
   }
 
   holdingTrackById(index, holding: StockHolding) {
