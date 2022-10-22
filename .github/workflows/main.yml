@@ -10,7 +10,7 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: '16.x'
       - name: Cache Node.js modules
         uses: actions/cache@v2
         with:          
@@ -45,4 +45,5 @@ jobs:
         with:
           args: deploy --only hosting
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BATCH1_161201 }}
+          
