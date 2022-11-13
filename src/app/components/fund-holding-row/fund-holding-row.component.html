@@ -1,0 +1,10 @@
+<ion-grid style="padding-top: 0; padding-bottom: 0">
+  <ion-row>
+    <ion-col size="3" size-lg="2">{{ stockCode }}</ion-col>
+    <ion-col size="3" size-lg="2"  class="ion-text-right" *ngIf="showMore">{{holding.quantity}}</ion-col>
+    <ion-col size="3" size-lg="2"  class="ion-text-right" *ngIf="showMore">{{holding.price}}</ion-col>
+    <ion-col size="3" size-lg="2" class="ion-text-right">{{holding.gross | number: '1.0-0'}}</ion-col>
+    <ion-col size="3" size-lg="2" class="ion-text-right">{{holding.netProfit | number: '1.0-0'}}</ion-col>
+    <ion-col size="3" size-lg="2" class="ion-text-right">{{holding.netProfit/holding.gross*100 | number: '1.2-2'}}%</ion-col>
+  </ion-row>
+</ion-grid>

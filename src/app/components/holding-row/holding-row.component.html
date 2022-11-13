@@ -1,0 +1,23 @@
+<ion-grid style="padding-top: 0; padding-bottom: 0">
+
+  <ion-row>
+    <ion-col size="4">{{holding.code}}</ion-col>
+    <ion-col size="4">
+      <span *ngIf="holding.side == 'BUY'">{{changePercentage() | number: '1.2-2'}}% </span>
+      <span *ngIf="showMore">({{relativePerformance() | number: '1.2-2'}})</span>
+    </ion-col>
+    <ion-col size="4">{{holding.price | number: '1.2-3'}}</ion-col>
+    <ion-col size="4" class="ion-text-right">${{holding.gross | number: '1.0'}} ({{holding.side=='BUY' ? '+' : '-'}}{{holding.quantity}})</ion-col>
+    <ion-col size="4" class="ion-text-right">{{holding.date | date: 'yy/MM/dd'}}</ion-col>
+    <ion-col size="4" class="ion-text-right">{{holding.fundName}} <ion-icon name="pricetag-outline"></ion-icon></ion-col>
+  </ion-row>
+
+</ion-grid>
+
+<!--<ion-modal #diffPercentageModal trigger="open-modal">-->
+<!--  <ng-template>-->
+<!--    <ion-list>-->
+<!--      <ion-item></ion-item>-->
+<!--    </ion-list>-->
+<!--  </ng-template>-->
+<!--</ion-modal>-->

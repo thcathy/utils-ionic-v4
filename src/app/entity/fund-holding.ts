@@ -1,11 +1,12 @@
 export class FundHolding {
   constructor(
     public code: string,
-    public quanity: number,
+    public quantity: number,
     public gross: number,
     public date: Date,
-    public spotPrice: number,
-    public netProfit: number
+    public price: number,
+    public netProfit: number,
+    public spot: number,
   ) { }
 
   public toString() {
