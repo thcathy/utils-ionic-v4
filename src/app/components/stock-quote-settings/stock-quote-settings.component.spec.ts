@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {IonicModule, Platform} from '@ionic/angular';
 
 import { StockQuoteSettingsComponent } from './stock-quote-settings.component';
@@ -15,7 +15,7 @@ describe('StockQuoteSettingsComponent', () => {
   let component: StockQuoteSettingsComponent;
   let fixture: ComponentFixture<StockQuoteSettingsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ StockQuoteSettingsComponent ],
       imports: [

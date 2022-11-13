@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ForumWishListPage } from './forum-wish-list.page';
 import {AlertController, LoadingController, Platform} from '@ionic/angular';
@@ -13,7 +13,7 @@ describe('ForumWishListPage', () => {
   let component: ForumWishListPage;
   let fixture: ComponentFixture<ForumWishListPage>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ForumWishListPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { StockFullQuotePage } from './stock-full-quote.page';
 import {AlertController, LoadingController, ModalController, Platform, PopoverController, ToastController} from '@ionic/angular';
@@ -20,7 +20,7 @@ describe('StockFullQuotePage', () => {
   let component: StockFullQuotePage;
   let fixture: ComponentFixture<StockFullQuotePage>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ StockFullQuotePage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

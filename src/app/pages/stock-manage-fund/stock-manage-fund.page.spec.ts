@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { StockManageFundPage } from './stock-manage-fund.page';
 import {AlertController, LoadingController, Platform} from '@ionic/angular';
@@ -13,7 +13,7 @@ describe('StockManageFundPage', () => {
   let component: StockManageFundPage;
   let fixture: ComponentFixture<StockManageFundPage>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ StockManageFundPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

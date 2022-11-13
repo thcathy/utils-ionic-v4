@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { HoldingRowComponent } from './holding-row.component';
@@ -7,7 +7,7 @@ describe('HoldingRowComponent', () => {
   let component: HoldingRowComponent;
   let fixture: ComponentFixture<HoldingRowComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ HoldingRowComponent ],
       imports: [IonicModule.forRoot()]

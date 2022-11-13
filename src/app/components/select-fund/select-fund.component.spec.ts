@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SelectFundComponent } from './select-fund.component';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
@@ -12,7 +12,7 @@ describe('SelectFundComponent', () => {
   let component: SelectFundComponent;
   let fixture: ComponentFixture<SelectFundComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SelectFundComponent ],
       imports: [
