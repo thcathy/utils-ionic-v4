@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ForumWishListPage } from './forum-wish-list.page';
 import {AlertController, LoadingController, Platform} from '@ionic/angular';
-import {AlertControllerSpy, AuthServiceSpy, LoadingControllerSpy, NGXLoggerSpy, PlatformMock} from '../../../mocks-ionic';
+import {AlertControllerSpy, MyAuthServiceSpy, LoadingControllerSpy, NGXLoggerSpy, PlatformMock} from '../../../mocks-ionic';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {NGXLogger} from 'ngx-logger';
@@ -26,7 +26,7 @@ describe('ForumWishListPage', () => {
         { provide: Platform, useValue: PlatformMock },
         { provide: NGXLogger, useValue: NGXLoggerSpy() },
         { provide: AlertController, useValue: AlertControllerSpy() },
-        { provide: MyAuthService, useValue: AuthServiceSpy()}
+        { provide: MyAuthService, useValue: MyAuthServiceSpy()}
       ]
     })
     .compileComponents();

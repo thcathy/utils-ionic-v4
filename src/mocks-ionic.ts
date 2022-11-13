@@ -123,7 +123,7 @@ export const LoadingControllerSpy = () => {
 
 export const AlertControllerSpy = () => jasmine.createSpyObj('AlertController', ['create']);
 
-export const AuthServiceSpy = () => jasmine.createSpyObj('AuthService', ['requireAuthenticated']);
+export const MyAuthServiceSpy = () => jasmine.createSpyObj('MyAuthService', ['requireAuthenticated', 'handleAuthCallbackWeb', 'loadSession', 'isAuthenticated']);
 
 export const PopoverControllerSpy = () => jasmine.createSpyObj('PopoverController', ['create']);
 

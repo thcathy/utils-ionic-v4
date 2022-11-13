@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { StockManageFundPage } from './stock-manage-fund.page';
 import {AlertController, LoadingController, Platform} from '@ionic/angular';
-import {AlertControllerSpy, AuthServiceSpy, LoadingControllerSpy, NGXLoggerSpy, PlatformMock} from '../../../mocks-ionic';
+import {AlertControllerSpy, MyAuthServiceSpy, LoadingControllerSpy, NGXLoggerSpy, PlatformMock} from '../../../mocks-ionic';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {MyAuthService} from '../../service/my-auth.service';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -26,7 +26,7 @@ describe('StockManageFundPage', () => {
         { provide: Platform, useValue: PlatformMock },
         { provide: NGXLogger, useValue: NGXLoggerSpy() },
         { provide: AlertController, useValue: AlertControllerSpy() },
-        { provide: MyAuthService, useValue: AuthServiceSpy()}
+        { provide: MyAuthService, useValue: MyAuthServiceSpy()}
       ]
     })
     .compileComponents();

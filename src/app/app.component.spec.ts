@@ -7,8 +7,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import {NGXLogger} from 'ngx-logger';
-import {NGXLoggerSpy} from '../mocks-ionic';
+import {MyAuthServiceSpy, NGXLoggerSpy} from '../mocks-ionic';
 import {RouterTestingModule} from '@angular/router/testing';
+import {MyAuthService} from './service/my-auth.service';
 
 describe('AppComponent', () => {
 
@@ -18,7 +19,7 @@ describe('AppComponent', () => {
     statusBarSpy = jasmine.createSpyObj('StatusBar', ['styleDefault']);
     splashScreenSpy = jasmine.createSpyObj('SplashScreen', ['hide']);
     platformReadySpy = Promise.resolve();
-    platformSpy = jasmine.createSpyObj('Platform', { ready: platformReadySpy, platforms: () => [] });
+    platformSpy = jasmine.createSpyObj('Platform', { ready: platformReadySpy, platforms: () => [], is: () => true });
 
     TestBed.configureTestingModule({
       declarations: [AppComponent],
@@ -28,6 +29,7 @@ describe('AppComponent', () => {
         { provide: StatusBar, useValue: statusBarSpy },
         { provide: SplashScreen, useValue: splashScreenSpy },
         { provide: Platform, useValue: platformSpy },
+        { provide: MyAuthService, useValue: MyAuthServiceSpy() },
         { provide: NGXLogger, useValue: NGXLoggerSpy() }
       ],
     }).compileComponents();

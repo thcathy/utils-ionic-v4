@@ -5,6 +5,8 @@ import { HomePage } from './home.page';
 import {IonicModule} from '@ionic/angular';
 import {RouterTestingModule} from '@angular/router/testing';
 import {NGXLogger} from 'ngx-logger';
+import {MyAuthService} from '../../service/my-auth.service';
+import {MyAuthServiceSpy} from '../../../mocks-ionic';
 
 describe('HomePage', () => {
   let component: HomePage;
@@ -20,6 +22,7 @@ describe('HomePage', () => {
       ],
       providers: [
         { provide: NGXLogger, useValue: jasmine.createSpyObj('NGXLogger', ['info', 'warn', 'error', 'debug']) },
+        { provide: MyAuthService, useValue: MyAuthServiceSpy() },
       ]
     })
       .compileComponents();

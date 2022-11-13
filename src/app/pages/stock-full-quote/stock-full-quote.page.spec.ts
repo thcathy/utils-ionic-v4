@@ -5,7 +5,7 @@ import { StockFullQuotePage } from './stock-full-quote.page';
 import {AlertController, LoadingController, ModalController, Platform, PopoverController, ToastController} from '@ionic/angular';
 import {
   AlertControllerSpy,
-  AuthServiceSpy,
+  MyAuthServiceSpy,
   LoadingControllerSpy, ModalControllerSpy,
   NGXLoggerSpy,
   PlatformMock,
@@ -33,7 +33,7 @@ describe('StockFullQuotePage', () => {
         { provide: Platform, useValue: PlatformMock },
         { provide: NGXLogger, useValue: NGXLoggerSpy() },
         { provide: AlertController, useValue: AlertControllerSpy() },
-        { provide: MyAuthService, useValue: AuthServiceSpy()},
+        { provide: MyAuthService, useValue: MyAuthServiceSpy()},
         { provide: PopoverController, useValue: PopoverControllerSpy()},
         { provide: ToastController, useValue: ToastControllerSpy() },
         { provide: ModalController, useValue: ModalControllerSpy() }
