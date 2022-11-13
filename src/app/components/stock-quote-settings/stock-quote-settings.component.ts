@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {StockQuote} from '../../entity/stock-quote';
 import {IonToggle, ModalController, NavParams, PopoverController, ToastController} from '@ionic/angular';
-import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {UntypedFormArray, UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
 import {KeyValue} from '@angular/common';
 import {StockService} from '../../service/stock.service';
 
@@ -13,7 +13,7 @@ import {StockService} from '../../service/stock.service';
 export class StockQuoteSettingsComponent implements OnInit {
   static SelectedIndexCodekey = 'thc_selected_index_code';
 
-  stockCodesForm: FormGroup;
+  stockCodesForm: UntypedFormGroup;
 
   @Input() indexes: StockQuote[];
   @Input() inputCodes: string[] = [];
@@ -27,7 +27,7 @@ export class StockQuoteSettingsComponent implements OnInit {
     private modalController: ModalController,
     private popoverController: PopoverController,
     private toastController: ToastController,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) {}
 
   ngOnInit() {
@@ -72,7 +72,7 @@ export class StockQuoteSettingsComponent implements OnInit {
     });
   }
 
-  get codes() { return this.stockCodesForm.get('codes') as FormArray; }
+  get codes() { return this.stockCodesForm.get('codes') as UntypedFormArray; }
 
   addControl(value = '') {
     const newControl = this.formBuilder.control('');

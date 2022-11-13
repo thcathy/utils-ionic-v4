@@ -11,9 +11,12 @@ export class AppService {
       public logger: NGXLogger
   ) { }
 
-  isCordova(): boolean {
-    this.logger.error(`platforms: ${this.platform.platforms()}`);
-    return this.platform.is('cordova');
+  isCapacitor(): boolean {
+    return this.platform.is('capacitor');
+  }
+
+  isApp(): boolean {
+    return !(this.platform.is('pwa') || !this.platform.is('cordova') || !this.platform.is('capacitor'));
   }
 
   handleError(err: HttpErrorResponse) {

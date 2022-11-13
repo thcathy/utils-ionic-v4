@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HoldingStock} from '../../entity/holding-stock';
 import {SquoteService} from '../../service/squote.service';
-import {AuthService} from '../../service/auth.service';
+import {MyAuthService} from '../../service/my-auth.service';
 
 @Component({
   selector: 'app-stock-create-holding',
@@ -15,7 +15,7 @@ export class StockCreateHoldingPage implements OnInit {
   createdHolding: HoldingStock;
 
   constructor(private squoteService: SquoteService,
-              private authService: AuthService) {
+              private authService: MyAuthService) {
       this.message = '';
       this.hscei = '';
   }

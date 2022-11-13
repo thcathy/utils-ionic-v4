@@ -12,7 +12,7 @@ import {
   PopoverControllerSpy, ToastControllerSpy
 } from '../../../mocks-ionic';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {AuthService} from '../../service/auth.service';
+import {MyAuthService} from '../../service/my-auth.service';
 import {RouterTestingModule} from '@angular/router/testing';
 import {NGXLogger} from 'ngx-logger';
 
@@ -33,7 +33,7 @@ describe('StockFullQuotePage', () => {
         { provide: Platform, useValue: PlatformMock },
         { provide: NGXLogger, useValue: NGXLoggerSpy() },
         { provide: AlertController, useValue: AlertControllerSpy() },
-        { provide: AuthService, useValue: AuthServiceSpy()},
+        { provide: MyAuthService, useValue: AuthServiceSpy()},
         { provide: PopoverController, useValue: PopoverControllerSpy()},
         { provide: ToastController, useValue: ToastControllerSpy() },
         { provide: ModalController, useValue: ModalControllerSpy() }

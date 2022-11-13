@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {CalculateExtension} from '../../../utils/utils';
 import {StockHolding} from '../../entity/stock-holding';
+import {IonModal} from '@ionic/angular';
 
 @Component({
   selector: 'app-holding-row',
@@ -13,18 +14,22 @@ export class HoldingRowComponent implements OnInit {
   @Input() spotPrice: number;
   @Input() hsceSpotPrice: number;
 
-  // @ViewChild('diffPercentageModal') articleDictationOptionsModal: IonModal;
+  @ViewChild('diffPercentageModal') diffPercentageModal: IonModal;
 
   constructor() { }
 
   ngOnInit() {}
 
-  public changePercentage() {
+  changePercentage() {
     return CalculateExtension.changePercentage(this.holding.price, this.spotPrice);
   }
 
-  public relativePerformance(): number {
+  relativePerformance(): number {
     return CalculateExtension.relativePerformance(this.holding, this.spotPrice, this.hsceSpotPrice);
+  }
+
+  showDiffPercentageModal() {
+    this.diffPercentageModal.present();
   }
 
 }

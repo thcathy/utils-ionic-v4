@@ -6,20 +6,19 @@ import {MenuItemComponent} from './menu-item/menu-item.component';
 import {CodePopoverMenu, StockQuoteSettingsComponent} from './stock-quote-settings/stock-quote-settings.component';
 
 @NgModule({
-  declarations: [
-    MenuItemComponent,
-    StockQuoteSettingsComponent, CodePopoverMenu,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule, ReactiveFormsModule,
-    IonicModule.forRoot(),
-  ],
-  exports: [
-    MenuItemComponent,
-    StockQuoteSettingsComponent,
-  ],
-  entryComponents: [ CodePopoverMenu ],
+    declarations: [
+        MenuItemComponent,
+        StockQuoteSettingsComponent, CodePopoverMenu,
+    ],
+    imports: [
+        CommonModule,
+        FormsModule, ReactiveFormsModule,
+        IonicModule.forRoot(),
+    ],
+    exports: [
+        MenuItemComponent,
+        StockQuoteSettingsComponent,
+    ]
 })
 export class ComponentsModule {
 }

@@ -2,7 +2,7 @@ import {Component, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {Fund} from '../../entity/fund';
 import {FundService} from '../../service/fund.service';
 import {AppService} from '../../service/app.service';
-import {AuthService} from '../../service/auth.service';
+import {MyAuthService} from '../../service/my-auth.service';
 
 @Component({
   selector: 'app-stock-manage-fund',
@@ -18,7 +18,7 @@ export class StockManageFundPage implements OnInit {
 
   constructor(private fundService: FundService,
               private appService: AppService,
-              public authService: AuthService) {
+              public authService: MyAuthService) {
   }
 
   ngOnInit() {

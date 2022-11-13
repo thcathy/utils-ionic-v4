@@ -1,27 +1,11 @@
 {
-  "appId": "com.thc.utils",
-  "appName": "THCUtilsApp",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
-  "webDir": "www",
-  "plugins": {
-    "SplashScreen": {
-      "launchShowDuration": 0
-    }
-  },
-  "cordova": {
-    "preferences": {
-      "ScrollEnabled": "false",
-      "android-minSdkVersion": "19",
-      "BackupWebStorage": "none",
-      "SplashMaintainAspectRatio": "true",
-      "FadeSplashScreenDuration": "300",
-      "SplashShowOnlyFirstTime": "false",
-      "SplashScreen": "screen",
-      "SplashScreenDelay": "3000"
-    }
-  },
-  "server": {
-    "iosScheme": "com.thc.utils"
-  }
+	"appId": "com.thc.utils",
+	"appName": "THCUtilsApp",
+	"webDir": "www",
+	"bundledWebRuntime": false,
+	"plugins": {
+		"SplashScreen": {
+			"launchShowDuration": 0
+		}
+	}
 }

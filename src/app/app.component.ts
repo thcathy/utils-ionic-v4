@@ -1,16 +1,18 @@
-import {Component} from '@angular/core';
+import {Component, NgZone} from '@angular/core';
 
 import {Platform} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
-import {AuthService} from './service/auth.service';
+import {MyAuthService} from './service/my-auth.service';
 import './prototypes/storage-prototypes';
 
-import Auth0Cordova from '@auth0/cordova';
 import {Router} from '@angular/router';
-import { Plugins } from '@capacitor/core';
+import {AppService} from './service/app.service';
+import { App, URLOpenListenerEvent } from '@capacitor/app';
+import { Browser } from '@capacitor/browser';
+import config from '../../capacitor.config';
 
-const { App } = Plugins;
+const auth0CallbackUri = `${config.appId}://thcathy.auth0.com/capacitor/${config.appId}/callback`;
 
 @Component({
     selector: 'app-root',
@@ -22,10 +24,12 @@ export class AppComponent {
         private platform: Platform,
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
-        private authService: AuthService,
+        private authService: MyAuthService,
         public router: Router,
+        public appService: AppService,
+        private zone: NgZone,
     ) {
-        authService.handleAuthentication();
+        this.authService.handleAuthCallbackWeb();
         this.initializeApp();
     }
 
@@ -37,10 +41,19 @@ export class AppComponent {
             this.splashScreen.hide();
         });
 
-        App.addListener('appUrlOpen', (data: any) => {
-            console.log('App opened with URL: ' +  data.url);
-            Auth0Cordova.onRedirectUri(data.url);
-        });
+        if (this.appService.isCapacitor()) {
+            App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
+                this.zone.run(() => {
+                    console.log(`url=${event.url}`);
+                    if (event.url.includes(auth0CallbackUri)) {
+                        this.authService.handleAuthCallbackCapacitor(event.url);
+                        return;
+                    }
+
+                    this.router.navigate(['/home']);
+                });
+            });
+        }
     }
 
     login() {

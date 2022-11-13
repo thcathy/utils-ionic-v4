@@ -6,7 +6,7 @@ import {StockQuote} from '../../entity/stock-quote';
 import {StockHolding} from '../../entity/stock-holding';
 import {Fund} from '../../entity/fund';
 import {StockQuoteSettingsComponent} from '../../components/stock-quote-settings/stock-quote-settings.component';
-import {AuthService} from '../../service/auth.service';
+import {MyAuthService} from '../../service/my-auth.service';
 
 @Component({
     selector: 'app-stock-full-quote',
@@ -32,7 +32,7 @@ export class StockFullQuotePage implements OnInit {
                 public popoverCtrl: PopoverController,
                 public toastCtrl: ToastController,
                 public modalController: ModalController,
-                public authService: AuthService) {
+                public authService: MyAuthService) {
     }
 
     ngOnInit() {

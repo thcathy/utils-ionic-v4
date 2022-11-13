@@ -8,7 +8,7 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {NGXLogger} from 'ngx-logger';
 import {NGXLoggerSpy, StorageSpy} from '../../../mocks-ionic';
-import {FormBuilder} from '@angular/forms';
+import {UntypedFormBuilder} from '@angular/forms';
 import {Storage} from '@ionic/storage';
 
 describe('StockQuoteSettingsComponent', () => {
@@ -26,7 +26,7 @@ describe('StockQuoteSettingsComponent', () => {
       providers: [
         { provide: NGXLogger, useValue: NGXLoggerSpy() },
         { provode: Storage, useValue: StorageSpy() },
-        FormBuilder,
+        UntypedFormBuilder,
       ],
     }).compileComponents();
 

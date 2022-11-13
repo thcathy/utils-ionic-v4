@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ForumWishItem} from '../../entity/forum-wishlist';
 import {AlertController} from '@ionic/angular';
 import {ForumService} from '../../service/forum.service';
-import {AuthService} from '../../service/auth.service';
+import {MyAuthService} from '../../service/my-auth.service';
 
 @Component({
     selector: 'app-forum-wish-list',
@@ -16,7 +16,7 @@ export class ForumWishListPage implements OnInit {
     constructor(
         public alertController: AlertController,
         public forumService: ForumService,
-        public authService: AuthService
+        public authService: MyAuthService
     ) {
     }
 

@@ -5,7 +5,7 @@ import { StockCreateHoldingPage } from './stock-create-holding.page';
 import {AlertController, LoadingController, Platform} from '@ionic/angular';
 import {AlertControllerSpy, AuthServiceSpy, LoadingControllerSpy, NGXLoggerSpy, PlatformMock} from '../../../mocks-ionic';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {AuthService} from '../../service/auth.service';
+import {MyAuthService} from '../../service/my-auth.service';
 import {RouterTestingModule} from '@angular/router/testing';
 import {NGXLogger} from 'ngx-logger';
 
@@ -26,7 +26,7 @@ describe('StockCreateHoldingPage', () => {
         { provide: Platform, useValue: PlatformMock },
         { provide: NGXLogger, useValue: NGXLoggerSpy() },
         { provide: AlertController, useValue: AlertControllerSpy() },
-        { provide: AuthService, useValue: AuthServiceSpy()}
+        { provide: MyAuthService, useValue: AuthServiceSpy()}
       ]
     })
     .compileComponents();

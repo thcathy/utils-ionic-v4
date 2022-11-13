@@ -2,7 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import {StockHolding} from '../../entity/stock-holding';
 import {AlertController} from '@ionic/angular';
 import {StockService} from '../../service/stock.service';
-import {AuthService} from '../../service/auth.service';
+import {MyAuthService} from '../../service/my-auth.service';
 
 @Component({
   selector: 'app-stock-manage-holding',
@@ -14,7 +14,7 @@ export class StockManageHoldingPage implements OnInit {
 
   constructor(public alertController: AlertController,
               public stockService: StockService,
-              public authService: AuthService,
+              public authService: MyAuthService,
               private ngZone: NgZone) { }
 
   ngOnInit() {}

@@ -7,7 +7,7 @@ import {AlertControllerSpy, AuthServiceSpy, LoadingControllerSpy, NGXLoggerSpy, 
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {NGXLogger} from 'ngx-logger';
-import {AuthService} from '../../service/auth.service';
+import {MyAuthService} from '../../service/my-auth.service';
 
 describe('ForumWishListPage', () => {
   let component: ForumWishListPage;
@@ -26,7 +26,7 @@ describe('ForumWishListPage', () => {
         { provide: Platform, useValue: PlatformMock },
         { provide: NGXLogger, useValue: NGXLoggerSpy() },
         { provide: AlertController, useValue: AlertControllerSpy() },
-        { provide: AuthService, useValue: AuthServiceSpy()}
+        { provide: MyAuthService, useValue: AuthServiceSpy()}
       ]
     })
     .compileComponents();
