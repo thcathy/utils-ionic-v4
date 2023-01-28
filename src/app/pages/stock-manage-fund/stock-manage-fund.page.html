@@ -52,11 +52,17 @@
             <ion-button fill="outline" size="small" (click)="onSelectString('remove/')">remove</ion-button>
             <span>/[code]</span>
           </ion-item>
+
           <ion-item>
             <span>[fundName]/</span>
             <ion-button fill="outline" size="small" (click)="onSelectString('payinterest/')">payinterest</ion-button>
             <span>/[code]/[amount]</span>
           </ion-item>
+          <ion-item>
+            <ion-button fill="outline" size="small" (click)="onSelectString('splitinterest/')">splitinterest</ion-button>
+            <span>/[code]/[amount]/[funds(/ separated)]</span>
+          </ion-item>
+
           <ion-item>
             <span>[fundName]/</span>
             <ion-button fill="outline" size="small" (click)="onSelectString('set/profit/')">set/profit</ion-button>
