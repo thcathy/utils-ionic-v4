@@ -6,6 +6,8 @@ export namespace CalculateExtension {
     }
 
     export function relativePerformance(holding: StockHolding, spot: number, hsceSpot: number): number {
+        if (hsceSpot === 0) { return 0; }
+
         const factor = (holding.side === 'BUY') ? 1 : -1;
         return (changePercentage(holding.gross / holding.quantity, spot) - changePercentage(holding.hsce, hsceSpot)) * factor;
     }

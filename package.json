@@ -9,7 +9,9 @@
     "test": "ng test",
     "test-ci": "ng test --watch=false --browsers=ChromeHeadlessNoSandbox",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "wdio": "wdio run tests/config/wdio.conf.ts",
+    "ionic-e2e:run:web": "TS_NODE_PROJECT=tests/tsconfig.json wdio tests/config/wdio.conf.ts"
   },
   "private": true,
   "dependencies": {
@@ -58,6 +60,7 @@
     "@angular/compiler": "^14.2.10",
     "@angular/compiler-cli": "^14.2.10",
     "@angular/language-service": "^14.2.10",
+    "@badisi/wdio-harness": "^2.0.1",
     "@capacitor/cli": "^4.0.0",
     "@ionic/angular-toolkit": "^7.0.0",
     "@types/jasmine": "~3.6.0",
@@ -65,6 +68,13 @@
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "5.29.0",
     "@typescript-eslint/parser": "5.29.0",
+    "@wdio/appium-service": "^8.3.10",
+    "@wdio/cli": "^8.3.10",
+    "@wdio/jasmine-framework": "^8.3.10",
+    "@wdio/local-runner": "^8.3.10",
+    "@wdio/spec-reporter": "^8.3.0",
+    "appium": "^1.22.3",
+    "chromedriver": "^110.0.0",
     "codelyzer": "^6.0.0",
     "cordova-plugin-device": "^2.0.2",
     "eslint": "^8.18.0",
@@ -77,9 +87,11 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "karma-junit-reporter": "^2.0.1",
     "protractor": "~7.0.0",
-    "ts-node": "^8.8.1",
+    "ts-node": "^10.4.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.6.4"
+    "typescript": "~4.6.4",
+    "wdio-chromedriver-service": "^8.1.1",
+    "wdio-wait-for": "^3.0.2"
   },
   "description": "An Ionic project",
   "cordova": {
