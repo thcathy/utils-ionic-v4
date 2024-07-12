@@ -17,8 +17,8 @@ export class SquoteService {
     ) {
     }
 
-    private createHoldingStockUrl = environment.apiHost + '/rest/createholding/create/?';  // URL to web api
-    private updateFundByHoldingUrl = environment.apiHost + '/rest/createholding/updatefund/?';
+    private createHoldingStockUrl = environment.apiHost + '/rest/createholding/create?';  // URL to web api
+    private updateFundByHoldingUrl = environment.apiHost + '/rest/createholding/updatefund?';
 
     createHoldingStock(message: string, hscei: string) {
         const queryString = 'message=' + encodeURIComponent(message) + '&hscei=' + hscei;

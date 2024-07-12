@@ -15,8 +15,7 @@ export class FundService {
     return this.http.get<Fund[]>(this.ALL_FUND_URL);
   }
 
-  submitRequest(request: string): Promise<string> {
-    if (request.slice(-1) !== '/') { request += '/'; }
+  submitRequest(request: string): Promise<string> {    
     console.log(`calling fund request url ${request}`);
     return this.http.get(this.BASE_REQUEST_URL + request)
             .toPromise()
