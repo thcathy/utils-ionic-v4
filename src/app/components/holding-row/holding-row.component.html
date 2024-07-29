@@ -1,47 +1,64 @@
 <ion-grid style="padding-top: 0; padding-bottom: 0">
 
-  <ion-row>
-    <ion-col size="4">{{holding.code}}</ion-col>
-    <ion-col size="4">
-      <span *ngIf="holding.side == 'BUY'">{{changePercentage() | number: '1.2-2'}}% </span>
-      <span *ngIf="showMore">({{relativePerformance() | number: '1.2-2'}})</span>
-    </ion-col>
-    <ion-col size="4">{{holding.price | number: '1.2-3'}}</ion-col>
-    <ion-col size="4" class="ion-text-right">${{holding.gross | number: '1.0'}} ({{holding.side=='BUY' ? '+' : '-'}}{{holding.quantity}})</ion-col>
-    <ion-col size="4" class="ion-text-right">{{holding.date | date: 'yy/MM/dd'}}</ion-col>
-    <ion-col size="4" class="ion-text-right">
-      {{holding.fundName}}
-      <ion-icon class="showModalButton" name="pricetag-outline" (click)="diffPercentageModal.present()"></ion-icon>
-    </ion-col>
-  </ion-row>
+    <ion-row>
+        <ion-col size="4">{{ holding.code }}</ion-col>
+        <ion-col size="4">
+            <span *ngIf="holding.side == 'BUY'">{{ changePercentage() | number: '1.2-2' }}% </span>
+            <span *ngIf="showMore">({{ relativePerformance() | number: '1.2-2' }})</span>
+        </ion-col>
+        <ion-col size="4">{{ holding.price | number: '1.2-3' }}</ion-col>
+        <ion-col size="4" class="ion-text-right">${{ holding.gross | number: '1.0' }}
+            ({{ holding.side == 'BUY' ? '+' : '-' }}{{ holding.quantity }})
+        </ion-col>
+        <ion-col size="4" class="ion-text-right">{{ holding.date | date: 'yy/MM/dd' }}</ion-col>
+        <ion-col size="4" class="ion-text-right">
+            {{ holding.fundName }}
+            <ion-icon class="showModalButton" name="pricetag-outline"
+                      (click)="diffPercentageModal.present()"></ion-icon>
+        </ion-col>
+    </ion-row>
 
 </ion-grid>
 
 <ion-modal #diffPercentageModal trigger="open-modal">
-  <ng-template>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>{{holding.price | number: '1.2-3'}} {{holding.side=='BUY' ? '+' : '-'}}{{holding.quantity}}</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="diffPercentageModal.dismiss()"><ion-icon name="close-outline"></ion-icon></ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding">
-      <ion-list>
-        <ion-item>
-          {{holding.price * 1.1 | number: '1.3-3'}} <span slot="end">+10%</span>
-        </ion-item>
-        <ion-item>
-          {{holding.price * 1.06 | number: '1.3-3'}} <span slot="end">+6%</span>
-        </ion-item>
-        <ion-item>
-          {{holding.price * 0.94 | number: '1.3-3'}} <span slot="end">-6%</span>
-        </ion-item>
-        <ion-item>
-          {{holding.price * 0.9 | number: '1.3-3'}} <span slot="end">-10%</span>
-        </ion-item>
-      </ion-list>
-    </ion-content>
-  </ng-template>
+    <ng-template>
+        <ion-header>
+            <ion-toolbar>
+                <ion-title>{{ holding.price | number: '1.2-3' }} {{ holding.side == 'BUY' ? '+' : '-' }}{{ holding.quantity }}</ion-title>
+                <ion-buttons slot="end">
+                    <ion-button (click)="diffPercentageModal.dismiss()">
+                        <ion-icon name="close-outline"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+            <ion-list>
+                <!--        <ion-item>-->
+                <!--          {{holding.price * 1.1 | number: '1.3-3'}} <span slot="end">+10%</span>-->
+                <!--        </ion-item>-->
+                <ion-item>
+                    {{ holding.price * 1.06 | number: '1.3-3' }} <span slot="end">+6%</span>
+                </ion-item>
+                <ion-item>
+                    {{ holding.price * 1.0262 | number: '1.3-3' }} <span slot="end">+2.62%</span>
+                </ion-item>
+                <ion-item>
+                    {{ holding.price * 1.0618 | number: '1.3-3' }} <span slot="end">+1.618%</span>
+                </ion-item>
+                <ion-item>
+                    {{ holding.price * 0.98382 | number: '1.3-3' }} <span slot="end">-1.618%</span>
+                </ion-item>
+                <ion-item>
+                    {{ holding.price * 0.9738 | number: '1.3-3' }} <span slot="end">-2.62%</span>
+                </ion-item>
+                <ion-item>
+                    {{ holding.price * 0.94 | number: '1.3-3' }} <span slot="end">-6%</span>
+                </ion-item>
+                <!--        <ion-item>-->
+                <!--          {{holding.price * 0.9 | number: '1.3-3'}} <span slot="end">-10%</span>-->
+                <!--        </ion-item>-->
+            </ion-list>
+        </ion-content>
+    </ng-template>
 </ion-modal>
