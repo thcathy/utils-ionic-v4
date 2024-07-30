@@ -44,16 +44,16 @@
                     {{ holding.price * 1.0262 | number: '1.3-3' }} <span slot="end">+2.62%</span>
                 </ion-item>
                 <ion-item>
-                    {{ holding.price * 1.0618 | number: '1.3-3' }} <span slot="end">+1.618%</span>
+                    {{ holding.price * 1.01618 | number: '1.3-3' }} <span slot="end">+1.618%</span>
                 </ion-item>
                 <ion-item>
-                    {{ holding.price * 0.98382 | number: '1.3-3' }} <span slot="end">-1.618%</span>
+                    {{ holding.price / 1.01618 | number: '1.3-3' }} <span slot="end">-1.618%</span>
                 </ion-item>
                 <ion-item>
-                    {{ holding.price * 0.9738 | number: '1.3-3' }} <span slot="end">-2.62%</span>
+                    {{ holding.price / 1.0262 | number: '1.3-3' }} <span slot="end">-2.62%</span>
                 </ion-item>
                 <ion-item>
-                    {{ holding.price * 0.94 | number: '1.3-3' }} <span slot="end">-6%</span>
+                    {{ holding.price / 1.06 | number: '1.3-3' }} <span slot="end">-6%</span>
                 </ion-item>
                 <!--        <ion-item>-->
                 <!--          {{holding.price * 0.9 | number: '1.3-3'}} <span slot="end">-10%</span>-->
